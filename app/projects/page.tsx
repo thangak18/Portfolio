@@ -1,17 +1,21 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Github } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { useLanguage } from "@/lib/contexts"
 
 export default function Projects() {
+  const { t } = useLanguage()
+
   const projects = [
     {
       id: 1,
-      title: "Expense Tracker App",
-      description:
-        "A full-stack expense tracking application with user authentication, category management, and detailed analytics. Built with React, Node.js, and MongoDB.",
+      title: t('projects.expenseTracker.title'),
+      description: t('projects.expenseTracker.desc'),
       image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop&crop=center",
       technologies: ["React", "Node.js", "MongoDB", "Express", "Chart.js"],
       githubUrl: "https://github.com/alexjohnson/expense-tracker",
@@ -20,9 +24,8 @@ export default function Projects() {
     },
     {
       id: 2,
-      title: "Weather Dashboard", 
-      description:
-        "A responsive weather application that displays current conditions and 5-day forecasts. Features location search and beautiful weather animations.",
+      title: t('projects.weather.title'),
+      description: t('projects.weather.desc'),
       image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=400&h=200&fit=crop&crop=center",
       technologies: ["React", "TypeScript", "Tailwind CSS", "OpenWeather API"],
       githubUrl: "https://github.com/alexjohnson/weather-dashboard",
@@ -31,9 +34,8 @@ export default function Projects() {
     },
     {
       id: 3,
-      title: "Task Management Tool",
-      description:
-        "A collaborative task management application with drag-and-drop functionality, team collaboration features, and real-time updates.",
+      title: t('projects.taskManager.title'),
+      description: t('projects.taskManager.desc'),
       image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=200&fit=crop&crop=center",
       technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Socket.io"],
       githubUrl: "https://github.com/alexjohnson/task-manager",
@@ -42,9 +44,8 @@ export default function Projects() {
     },
     {
       id: 4,
-      title: "Portfolio Website",
-      description:
-        "This very website! A responsive portfolio built with Next.js, featuring dark mode, smooth animations, and optimized performance.",
+      title: t('projects.portfolio.title'),
+      description: t('projects.portfolio.desc'),
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop&crop=center",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       githubUrl: "https://github.com/alexjohnson/portfolio",
@@ -53,9 +54,8 @@ export default function Projects() {
     },
     {
       id: 5,
-      title: "E-commerce Store",
-      description:
-        "A modern e-commerce platform with product catalog, shopping cart, payment integration, and admin dashboard for inventory management.",
+      title: t('projects.ecommerce.title'),
+      description: t('projects.ecommerce.desc'),
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop&crop=center",
       technologies: ["Next.js", "Stripe", "Sanity CMS", "Tailwind CSS"],
       githubUrl: "https://github.com/alexjohnson/ecommerce-store",
@@ -70,18 +70,21 @@ export default function Projects() {
   return (
     <main className="container mx-auto px-4 py-20">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4 text-center">My Projects</h1>
-        <p className="text-xl text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
-          Here are some of the projects I've worked on. Each one represents a learning journey and showcases different
-          aspects of my development skills.
+        <h1 className="text-4xl font-bold mb-4 text-center animate-slide-up">{t('projects.title')}</h1>
+        <p className="text-xl text-muted-foreground text-center mb-16 max-w-2xl mx-auto animate-slide-up-delay-1">
+          {t('projects.subtitle')}
         </p>
 
         {/* Featured Projects */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">Featured Projects</h2>
+        <section className="mb-16 animate-slide-up-delay-2">
+          <h2 className="text-2xl font-bold mb-8">{t('projects.featured')}</h2>
           <div className="grid lg:grid-cols-2 gap-8">
-            {featuredProjects.map((project) => (
-              <Card key={project.id} className="group hover:shadow-lg transition-all duration-300">
+            {featuredProjects.map((project, index) => (
+              <Card 
+                key={project.id} 
+                className="group hover:shadow-lg transition-all duration-300 hover-lift animate-scale-in"
+                style={{ animationDelay: `${index * 200}ms` }}
+              >
                 <div className="relative overflow-hidden rounded-t-lg">
                   <Image
                     src={project.image || "/placeholder.svg"}
@@ -96,7 +99,7 @@ export default function Projects() {
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between">
                     {project.title}
-                    <Badge variant="secondary">Featured</Badge>
+                    <Badge variant="secondary" className="animate-pulse-glow">Featured</Badge>
                   </CardTitle>
                 </CardHeader>
 
@@ -104,24 +107,29 @@ export default function Projects() {
                   <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
 
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-xs">
+                    {project.technologies.map((tech, techIndex) => (
+                      <Badge 
+                        key={tech} 
+                        variant="outline" 
+                        className="text-xs animate-slide-up"
+                        style={{ animationDelay: `${techIndex * 50}ms` }}
+                      >
                         {tech}
                       </Badge>
                     ))}
                   </div>
 
                   <div className="flex gap-3">
-                    <Button asChild size="sm" variant="outline">
+                    <Button asChild size="sm" variant="outline" className="group">
                       <Link href={project.githubUrl} target="_blank">
-                        <Github className="h-4 w-4 mr-2" />
+                        <Github className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
                         Code
                       </Link>
                     </Button>
                     {project.liveUrl && (
-                      <Button asChild size="sm">
+                      <Button asChild size="sm" className="group">
                         <Link href={project.liveUrl} target="_blank">
-                          <ExternalLink className="h-4 w-4 mr-2" />
+                          <ExternalLink className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
                           Live Demo
                         </Link>
                       </Button>
@@ -134,11 +142,15 @@ export default function Projects() {
         </section>
 
         {/* Other Projects */}
-        <section>
-          <h2 className="text-2xl font-bold mb-8">Other Projects</h2>
+        <section className="animate-slide-up-delay-3">
+          <h2 className="text-2xl font-bold mb-8">{t('projects.other')}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {otherProjects.map((project) => (
-              <Card key={project.id} className="group hover:shadow-md transition-all duration-300">
+            {otherProjects.map((project, index) => (
+              <Card 
+                key={project.id} 
+                className="group hover:shadow-md transition-all duration-300 hover-lift animate-scale-in"
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
                 <div className="relative overflow-hidden rounded-t-lg">
                   <Image
                     src={project.image || "/placeholder.svg"}
@@ -157,8 +169,13 @@ export default function Projects() {
                   <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{project.description}</p>
 
                   <div className="flex flex-wrap gap-1 mb-4">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-xs">
+                    {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                      <Badge 
+                        key={tech} 
+                        variant="outline" 
+                        className="text-xs animate-slide-up"
+                        style={{ animationDelay: `${techIndex * 30}ms` }}
+                      >
                         {tech}
                       </Badge>
                     ))}
@@ -170,16 +187,16 @@ export default function Projects() {
                   </div>
 
                   <div className="flex gap-2">
-                    <Button asChild size="sm" variant="outline" className="flex-1">
+                    <Button asChild size="sm" variant="outline" className="flex-1 group">
                       <Link href={project.githubUrl} target="_blank">
-                        <Github className="h-3 w-3 mr-1" />
+                        <Github className="h-3 w-3 mr-1 group-hover:scale-110 transition-transform" />
                         Code
                       </Link>
                     </Button>
                     {project.liveUrl && (
-                      <Button asChild size="sm" className="flex-1">
+                      <Button asChild size="sm" className="flex-1 group">
                         <Link href={project.liveUrl} target="_blank">
-                          <ExternalLink className="h-3 w-3 mr-1" />
+                          <ExternalLink className="h-3 w-3 mr-1 group-hover:scale-110 transition-transform" />
                           Demo
                         </Link>
                       </Button>
@@ -192,14 +209,13 @@ export default function Projects() {
         </section>
 
         {/* Call to Action */}
-        <section className="text-center mt-16 p-8 bg-muted/50 rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Interested in Working Together?</h2>
+        <section className="text-center mt-16 p-8 bg-muted/50 rounded-lg animate-slide-up-delay-4">
+          <h2 className="text-2xl font-bold mb-4">{t('projects.collaborate')}</h2>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            I'm always open to discussing new opportunities and interesting projects. Let's connect and see how we can
-            create something amazing together!
+            {t('projects.collaborateDesc')}
           </p>
-          <Button asChild size="lg">
-            <Link href="/contact">Get In Touch</Link>
+          <Button asChild size="lg" className="animate-pulse-glow">
+            <Link href="/contact">{t('projects.getInTouch')}</Link>
           </Button>
         </section>
       </div>

@@ -1,9 +1,14 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { Code, Palette, Zap, Heart } from "lucide-react"
+import { useLanguage } from "@/lib/contexts"
 
 export default function About() {
+  const { t } = useLanguage()
+
   const skills = [
     { name: "HTML/CSS", level: 90 },
     { name: "JavaScript", level: 85 },
@@ -13,35 +18,37 @@ export default function About() {
     { name: "Node.js", level: 65 },
     { name: "Tailwind CSS", level: 85 },
     { name: "Git/GitHub", level: 80 },
+    { name: "Python", level: 80},
+    { name: "C++", level: 90},
+    { name: "SQL server", level: 85},
+    {name: "MongoDB", level: 70},
+    {name: "Docker", level: 65},
   ]
 
   const interests = [
-    { icon: Code, title: "Clean Code", description: "Writing maintainable and readable code" },
-    { icon: Palette, title: "UI/UX Design", description: "Creating beautiful user experiences" },
-    { icon: Zap, title: "Performance", description: "Optimizing for speed and efficiency" },
-    { icon: Heart, title: "Open Source", description: "Contributing to the developer community" },
+    { icon: Code, title: t('about.interests.cleanCode'), description: t('about.interests.cleanCodeDesc') },
+    { icon: Palette, title: t('about.interests.uiux'), description: t('about.interests.uiuxDesc') },
+    { icon: Zap, title: t('about.interests.performance'), description: t('about.interests.performanceDesc') },
+    { icon: Heart, title: t('about.interests.opensource'), description: t('about.interests.opensourceDesc') },
   ]
 
   return (
     <main className="container mx-auto px-4 py-20">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">About Me</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center">{t('about.title')}</h1>
 
         {/* Introduction */}
         <Card className="mb-12">
           <CardContent className="p-8">
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <p className="text-lg leading-relaxed mb-6">
-                Hello! I'm Thang, a passionate fresher web developer based in Ho Chi Minh City, VietNam. I discovered my love for
-                programming during college and have been dedicated to creating amazing web experiences ever since.
+                {t('about.intro')}
               </p>
               <p className="text-lg leading-relaxed mb-6">
-                My journey started with HTML and CSS, and I quickly fell in love with JavaScript and React. I enjoy the
-                problem-solving aspect of development and the satisfaction of bringing ideas to life through code.
+                {t('about.journey')}
               </p>
               <p className="text-lg leading-relaxed">
-                When I'm not coding, you can find me exploring new coffee shops, hiking local trails, or contributing to
-                open-source projects. I'm always eager to learn new technologies and collaborate with other developers.
+                {t('about.personal')}
               </p>
             </div>
           </CardContent>
@@ -50,7 +57,7 @@ export default function About() {
         {/* Skills Section */}
         <Card className="mb-12">
           <CardHeader>
-            <CardTitle className="text-2xl">Technical Skills</CardTitle>
+            <CardTitle className="text-2xl">{t('about.skills')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-6">
@@ -70,7 +77,7 @@ export default function About() {
         {/* Interests */}
         <Card className="mb-12">
           <CardHeader>
-            <CardTitle className="text-2xl">What I'm Passionate About</CardTitle>
+            <CardTitle className="text-2xl">{t('about.interests')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-6">
@@ -92,30 +99,30 @@ export default function About() {
         {/* Fun Facts */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Fun Facts</CardTitle>
+            <CardTitle className="text-2xl">{t('about.funFacts')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-3 gap-4">
               <div className="text-center p-4">
                 <div className="text-2xl font-bold text-primary mb-2">50+</div>
-                <div className="text-sm text-muted-foreground">Cups of coffee per week</div>
+                <div className="text-sm text-muted-foreground">{t('about.coffee')}</div>
               </div>
               <div className="text-center p-4">
                 <div className="text-2xl font-bold text-primary mb-2">3</div>
-                <div className="text-sm text-muted-foreground">Programming languages</div>
+                <div className="text-sm text-muted-foreground">{t('about.languages')}</div>
               </div>
               <div className="text-center p-4">
                 <div className="text-2xl font-bold text-primary mb-2">∞</div>
-                <div className="text-sm text-muted-foreground">Passion for learning</div>
+                <div className="text-sm text-muted-foreground">{t('about.passion')}</div>
               </div>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-2">
-              <Badge variant="secondary">Coffee Enthusiast</Badge>
-              <Badge variant="secondary">Hiking Lover</Badge>
-              <Badge variant="secondary">Open Source Contributor</Badge>
-              <Badge variant="secondary">Continuous Learner</Badge>
-              <Badge variant="secondary">Problem Solver</Badge>
+              <Badge variant="secondary">{t('about.badges.coffee')}</Badge>
+              <Badge variant="secondary">{t('about.badges.hiking')}</Badge>
+              <Badge variant="secondary">{t('about.badges.opensource')}</Badge>
+              <Badge variant="secondary">{t('about.badges.learner')}</Badge>
+              <Badge variant="secondary">{t('about.badges.solver')}</Badge>
             </div>
           </CardContent>
         </Card>

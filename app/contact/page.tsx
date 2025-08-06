@@ -10,8 +10,10 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Facebook, Github, Linkedin, Mail, MapPin, Phone, Instagram } from "lucide-react"
 import Link from "next/link"
+import { useLanguage } from "@/lib/contexts"
 
 export default function Contact() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -48,34 +50,33 @@ export default function Contact() {
   return (
     <main className="container mx-auto px-4 py-20">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4 text-center">Get In Touch</h1>
+        <h1 className="text-4xl font-bold mb-4 text-center">{t('contact.title')}</h1>
         <p className="text-xl text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
-          I'd love to hear from you! Whether you have a project in mind, want to collaborate, or just want to say hello,
-          feel free to reach out.
+          {t('contact.subtitle')}
         </p>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <Card>
             <CardHeader>
-              <CardTitle>Send Me a Message</CardTitle>
+              <CardTitle>{t('contact.sendMessage')}</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Name *</Label>
+                    <Label htmlFor="name">{t('contact.name')} *</Label>
                     <Input
                       id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      placeholder="Your full name"
+                      placeholder={t('contact.placeholder.name')}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
+                    <Label htmlFor="email">{t('contact.email')} *</Label>
                     <Input
                       id="email"
                       name="email"
@@ -83,47 +84,47 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      placeholder="your.email@example.com"
+                      placeholder={t('contact.placeholder.email')}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="subject">Subject *</Label>
+                  <Label htmlFor="subject">{t('contact.subject')} *</Label>
                   <Input
                     id="subject"
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    placeholder="What's this about?"
+                    placeholder={t('contact.placeholder.subject')}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Message *</Label>
+                  <Label htmlFor="message">{t('contact.message')} *</Label>
                   <Textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    placeholder="Tell me about your project or just say hello!"
+                    placeholder={t('contact.placeholder.message')}
                     rows={6}
                   />
                 </div>
 
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {isSubmitting ? t('contact.sending') : t('contact.send')}
                 </Button>
 
                 {submitStatus === "success" && (
-                  <p className="text-green-600 text-center">Thank you! Your message has been sent successfully.</p>
+                  <p className="text-green-600 text-center">{t('contact.success')}</p>
                 )}
 
                 {submitStatus === "error" && (
                   <p className="text-red-600 text-center">
-                    Sorry, there was an error sending your message. Please try again.
+                    {t('contact.error')}
                   </p>
                 )}
               </form>
@@ -134,7 +135,7 @@ export default function Contact() {
           <div className="space-y-8">
             <Card>
               <CardHeader>
-                <CardTitle>Contact Information</CardTitle>
+                <CardTitle>{t('contact.contactInfo')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center space-x-4">
@@ -142,7 +143,7 @@ export default function Contact() {
                     <Mail className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="font-medium">Email</p>
+                    <p className="font-medium">{t('contact.email')}</p>
                     <Link
                       href="mailto:thangak18@gmail.com"
                       className="text-muted-foreground hover:text-primary transition-colors"
@@ -178,7 +179,7 @@ export default function Contact() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Connect With Me</CardTitle>
+                <CardTitle>{t('contact.connectWithMe')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex space-x-4">
@@ -195,39 +196,36 @@ export default function Contact() {
                       LinkedIn
                     </Link>
                   </Button>
-
-                  
-                  
                 </div>
 
                 <p className="text-sm text-muted-foreground mt-4">
-                  Follow me on social media to stay updated with my latest projects and thoughts on web development.
+                  {t('contact.followMe')}
                 </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle>Let's Collaborate</CardTitle>
+                <CardTitle>{t('contact.letsCollaborate')}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4">I'm always interested in:</p>
+                <p className="text-muted-foreground mb-4">{t('contact.alwaysInterested')}</p>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                    Frontend development projects
+                    {t('contact.frontendDev')}
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                    Open source contributions
+                    {t('contact.openSource')}
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                    Learning opportunities
+                    {t('contact.learning')}
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                    Mentorship and networking
+                    {t('contact.mentorship')}
                   </li>
                 </ul>
               </CardContent>

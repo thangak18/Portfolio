@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
+import { LanguageProvider, VisitorProvider } from "@/lib/contexts"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -57,11 +58,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div className="min-h-screen flex flex-col">
-            <Navigation />
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </div>
+          <LanguageProvider>
+            <VisitorProvider>
+              <div className="min-h-screen flex flex-col">
+                <Navigation />
+                <div className="flex-1">{children}</div>
+                <Footer />
+              </div>
+            </VisitorProvider>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

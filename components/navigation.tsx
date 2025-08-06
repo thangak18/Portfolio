@@ -7,22 +7,25 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
+import { useLanguage } from "@/lib/contexts"
+import LanguageSwitcher from "./language-switcher"
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   const navigation = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
+    { name: t('nav.home'), href: "/", key: 'nav.home' },
+    { name: t('nav.about'), href: "/about", key: 'nav.about' },
+    { name: t('nav.projects'), href: "/projects", key: 'nav.projects' },
+    { name: t('nav.contact'), href: "/contact", key: 'nav.contact' },
   ]
 
   const isActive = (href: string) => {
@@ -38,14 +41,14 @@ export default function Navigation() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="font-bold text-xl">
-            Thang
+            {t('contact.brand')}
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
               <Link
-                key={item.name}
+                key={item.key}
                 href={item.href}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   isActive(item.href) ? "text-primary" : "text-muted-foreground"
@@ -56,8 +59,10 @@ export default function Navigation() {
             ))}
           </nav>
 
-          {/* Theme Toggle & Mobile Menu */}
+          {/* Theme Toggle, Language Switcher & Mobile Menu */}
           <div className="flex items-center space-x-2">
+            <LanguageSwitcher />
+            
             {mounted && (
               <Button variant="ghost" size="sm" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
                 <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -78,7 +83,7 @@ export default function Navigation() {
                 <nav className="flex flex-col space-y-4 mt-8">
                   {navigation.map((item) => (
                     <Link
-                      key={item.name}
+                      key={item.key}
                       href={item.href}
                       onClick={() => setIsOpen(false)}
                       className={`text-lg font-medium transition-colors hover:text-primary ${
