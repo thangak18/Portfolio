@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { Code, Palette, Zap, Heart } from "lucide-react"
+import { Code, Palette, Zap, Heart, Flutter } from "lucide-react"
 import { useLanguage } from "@/lib/contexts"
 
 export default function About() {
@@ -17,12 +17,14 @@ export default function About() {
     { name: "TypeScript", level: 70 },
     { name: "Node.js", level: 65 },
     { name: "Tailwind CSS", level: 85 },
-    { name: "Git/GitHub", level: 80 },
+    { name: "Git", level: 80 },
     { name: "Python", level: 80},
     { name: "C++", level: 90},
     { name: "SQL server", level: 85},
-    {name: "MongoDB", level: 70},
-    {name: "Docker", level: 65},
+    { name: "MongoDB", level: 70},
+    { name: "Docker", level: 65},
+    { name: "Angular", level: 20},
+    { name: "Flutter", level: 20},
   ]
 
   const interests = [
@@ -30,6 +32,7 @@ export default function About() {
     { icon: Palette, title: t('about.interests.uiux'), description: t('about.interests.uiuxDesc') },
     { icon: Zap, title: t('about.interests.performance'), description: t('about.interests.performanceDesc') },
     { icon: Heart, title: t('about.interests.opensource'), description: t('about.interests.opensourceDesc') },
+    { icon: Flutter, title: t('about.interests.flutter'), description: t('about.interests.flutterDesc') },
   ]
 
   return (

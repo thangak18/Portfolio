@@ -11,28 +11,28 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: {
-    default: "Thang - Fresher Web Developer",
+    default: "Thang - Software Engineer",
     template: "%s | Thang",
   },
   description:
-    "Fresher Web Developer passionate about building user-friendly apps with React, Next.js, and TypeScript. View my portfolio and get in touch!",
-  keywords: ["web developer", "react", "next.js", "typescript", "frontend", "portfolio"],
+    "Software Engineer passionate about building user-friendly apps with React, Next.js, and TypeScript. View my portfolio and get in touch!",
+  keywords: ["Software Engineer", "Mobile Developer", "Full Stack Developer"],
   authors: [{ name: "Thang" }],
   creator: "Thang",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://thang.dev",
-    title: "Thang - Fresher Web Developer",
+    title: "Thang - Software Engineer",
     description:
-      "Junior Web Developer passionate about building user-friendly apps with React, Next.js, and TypeScript.",
+      "Software Engineer passionate about building user-friendly apps with React, Next.js, and TypeScript.",
     siteName: "Thang Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Thang - Fresher Web Developer",
+    title: "Thang - Software Engineer",
     description:
-      "Junior Web Developer passionate about building user-friendly apps with React, Next.js, and TypeScript.",
+      "Software Engineer passionate about building user-friendly apps with React, Next.js, and TypeScript.",
     creator: "@thangdev",
   },
   robots: {
