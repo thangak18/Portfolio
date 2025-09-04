@@ -14,16 +14,6 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: t('projects.expenseTracker.title'),
-      description: t('projects.expenseTracker.desc'),
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop&crop=center",
-      technologies: ["React", "Node.js", "MongoDB", "Express", "Chart.js"],
-      githubUrl: "https://github.com/alexjohnson/expense-tracker",
-      liveUrl: "https://expense-tracker-demo.vercel.app",
-      featured: false,
-    },
-    {
-      id: 2,
       title: t('projects.weather.title'),
       description: t('projects.weather.desc'),
       image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=400&h=200&fit=crop&crop=center",
@@ -34,7 +24,7 @@ export default function Projects() {
     },
 
     {
-      id: 3,
+      id: 2,
       title: t('projects.portfolio.title'),
       description: t('projects.portfolio.desc'),
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop&crop=center",
@@ -44,7 +34,7 @@ export default function Projects() {
       featured: true,    
     },
     {
-      id: 4 ,
+      id: 3 ,
       title: t('projects.ecommerce.title'),
       description: t('projects.ecommerce.desc'),
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop&crop=center",
@@ -52,6 +42,16 @@ export default function Projects() {
       githubUrl: "https://github.com/Alterix53/SE_GoMall",
       liveUrl: "https://store-demo.vercel.app",
       featured: true,
+    },
+    {
+      id: 4,
+      title: t('projects.pacman.title'),
+      description: t('projects.pacman.desc'),
+      image: "https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?w=400&h=200&fit=crop&crop=center",
+      technologies: ["Python"],
+      githubUrl: "https://github.com/thangak18/PacmanGame-Project",
+      liveUrl: "",
+      featured: false,
     },
   ]
 
@@ -117,14 +117,6 @@ export default function Projects() {
                         Code
                       </Link>
                     </Button>
-                    {project.liveUrl && (
-                      <Button asChild size="sm" className="group">
-                        <Link href={project.liveUrl} target="_blank">
-                          <ExternalLink className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
-                          Live Demo
-                        </Link>
-                      </Button>
-                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -184,14 +176,6 @@ export default function Projects() {
                         Code
                       </Link>
                     </Button>
-                    {project.liveUrl && (
-                      <Button asChild size="sm" className="flex-1 group">
-                        <Link href={project.liveUrl} target="_blank">
-                          <ExternalLink className="h-3 w-3 mr-1 group-hover:scale-110 transition-transform" />
-                          Demo
-                        </Link>
-                      </Button>
-                    )}
                   </div>
                 </CardContent>
               </Card>

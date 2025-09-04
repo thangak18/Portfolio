@@ -10,21 +10,19 @@ export default function About() {
   const { t } = useLanguage()
 
   const skills = [
-    { name: "HTML/CSS", level: 90 },
-    { name: "JavaScript", level: 85 },
-    { name: "React", level: 80 },
-    { name: "Next.js", level: 75 },
-    { name: "TypeScript", level: 70 },
-    { name: "Node.js", level: 65 },
-    { name: "Tailwind CSS", level: 85 },
-    { name: "Git", level: 80 },
-    { name: "Python", level: 80},
-    { name: "C++", level: 90},
-    { name: "SQL server", level: 85},
+    { name: "C", level: 90 },
+    { name: "C++", level: 90 },
+    { name: "Python", level: 90 },
+    { name: "Java", level: 80 },
+    { name: "Swift", level: 70 },
+    { name: "JavaScript", level: 70 },
+    { name: "HTML", level: 80 },
+    { name: "CSS", level: 80 },
+    { name: "Node.js/Express", level: 80},
+    { name: "SQL server", level: 90},
     { name: "MongoDB", level: 70},
     { name: "Docker", level: 65},
-    { name: "Angular", level: 20},
-    { name: "Flutter", level: 20},
+    { name: "Git", level: 85},
   ]
 
   const interests = [
