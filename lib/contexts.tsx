@@ -75,8 +75,7 @@ const translations = {
     'projects.expenseTracker.desc': "A full-stack expense tracking application with user authentication, category management, and detailed analytics. Built with React, Node.js, and MongoDB.",
     'projects.weather.title': "Weather Dashboard",
     'projects.weather.desc': "A responsive weather application that displays current conditions and 5-day forecasts. Features location search and beautiful weather animations.",
-    'projects.taskManager.title': "Task Management Tool",
-    'projects.taskManager.desc': "A collaborative task management application with drag-and-drop functionality, team collaboration features, and real-time updates.",
+
     'projects.portfolio.title': "Portfolio Website",
     'projects.portfolio.desc': "This very website! A responsive portfolio built with Next.js, featuring dark mode, smooth animations, and optimized performance.",
     'projects.ecommerce.title': "E-commerce Store",
@@ -167,8 +166,7 @@ const translations = {
     'projects.expenseTracker.desc': "Ứng dụng theo dõi chi tiêu full-stack với xác thực người dùng, quản lý danh mục và phân tích chi tiết. Được xây dựng với React, Node.js và MongoDB.",
     'projects.weather.title': "Bảng Điều Khiển Thời Tiết",
     'projects.weather.desc': "Ứng dụng thời tiết responsive hiển thị điều kiện hiện tại và dự báo 5 ngày. Có tính năng tìm kiếm vị trí và hoạt ảnh thời tiết đẹp mắt.",
-    'projects.taskManager.title': "Công Cụ Quản Lý Công Việc",
-    'projects.taskManager.desc': "Ứng dụng quản lý công việc cộng tác với chức năng kéo thả, tính năng cộng tác nhóm và cập nhật thời gian thực.",
+
     'projects.portfolio.title': "Website Portfolio",
     'projects.portfolio.desc': "Chính website này! Portfolio responsive được xây dựng với Next.js, có chế độ tối, hoạt ảnh mượt mà và hiệu suất tối ưu.",
     'projects.ecommerce.title': "Cửa Hàng Thương Mại Điện Tử",

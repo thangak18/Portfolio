@@ -20,7 +20,7 @@ export default function Projects() {
       technologies: ["React", "Node.js", "MongoDB", "Express", "Chart.js"],
       githubUrl: "https://github.com/alexjohnson/expense-tracker",
       liveUrl: "https://expense-tracker-demo.vercel.app",
-      featured: true,
+      featured: false,
     },
     {
       id: 2,
@@ -30,7 +30,7 @@ export default function Projects() {
       technologies: ["React", "TypeScript", "Tailwind CSS", "OpenWeather API"],
       githubUrl: "https://github.com/thangak18/Weather-dashboard",
       liveUrl: "https://weather-dashboard-demo.vercel.app",
-      featured: true,
+      featured: false,
     },
 
     {
@@ -39,19 +39,19 @@ export default function Projects() {
       description: t('projects.portfolio.desc'),
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop&crop=center",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-      githubUrl: "https://github.com/alexjohnson/portfolio",
+      githubUrl: "https://github.com/thangak18/Portfolio",
       liveUrl: "https://alexjohnson.dev",
-      featured: false,
+      featured: true,    
     },
     {
       id: 4 ,
       title: t('projects.ecommerce.title'),
       description: t('projects.ecommerce.desc'),
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop&crop=center",
-      technologies: ["Next.js", "Stripe", "Sanity CMS", "Tailwind CSS"],
-      githubUrl: "https://github.com/alexjohnson/ecommerce-store",
+      technologies: ["Next.js", "React", "Sanity CMS", "CSS"],
+      githubUrl: "https://github.com/Alterix53/SE_GoMall",
       liveUrl: "https://store-demo.vercel.app",
-      featured: false,
+      featured: true,
     },
   ]
 
