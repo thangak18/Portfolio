@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { Code, Palette, Zap, Heart, Flutter } from "lucide-react"
+import { Code, Palette, Zap, Heart} from "lucide-react"
 import { useLanguage } from "@/lib/contexts"
 
 export default function About() {
@@ -32,7 +32,7 @@ export default function About() {
     { icon: Palette, title: t('about.interests.uiux'), description: t('about.interests.uiuxDesc') },
     { icon: Zap, title: t('about.interests.performance'), description: t('about.interests.performanceDesc') },
     { icon: Heart, title: t('about.interests.opensource'), description: t('about.interests.opensourceDesc') },
-    { icon: Flutter, title: t('about.interests.flutter'), description: t('about.interests.flutterDesc') },
+    //{ icon: Flutter, title: t('about.interests.flutter'), description: t('about.interests.flutterDesc') },
   ]
 
   return (

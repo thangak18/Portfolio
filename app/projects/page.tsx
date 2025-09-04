@@ -28,22 +28,13 @@ export default function Projects() {
       description: t('projects.weather.desc'),
       image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=400&h=200&fit=crop&crop=center",
       technologies: ["React", "TypeScript", "Tailwind CSS", "OpenWeather API"],
-      githubUrl: "https://github.com/alexjohnson/weather-dashboard",
+      githubUrl: "https://github.com/thangak18/Weather-dashboard",
       liveUrl: "https://weather-dashboard-demo.vercel.app",
       featured: true,
     },
+
     {
       id: 3,
-      title: t('projects.taskManager.title'),
-      description: t('projects.taskManager.desc'),
-      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=200&fit=crop&crop=center",
-      technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Socket.io"],
-      githubUrl: "https://github.com/alexjohnson/task-manager",
-      liveUrl: "https://task-manager-demo.vercel.app",
-      featured: false,
-    },
-    {
-      id: 4,
       title: t('projects.portfolio.title'),
       description: t('projects.portfolio.desc'),
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop&crop=center",
@@ -53,7 +44,7 @@ export default function Projects() {
       featured: false,
     },
     {
-      id: 5,
+      id: 4 ,
       title: t('projects.ecommerce.title'),
       description: t('projects.ecommerce.desc'),
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop&crop=center",
