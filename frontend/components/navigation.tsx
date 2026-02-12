@@ -8,7 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useLanguage } from "@/lib/contexts"
-import LanguageSwitcher from "./language-switcher"
+
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -77,11 +77,10 @@ export default function Navigation() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm"
-          : "bg-transparent"
-      }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
+        ? "border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm"
+        : "bg-transparent"
+        }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
@@ -105,11 +104,10 @@ export default function Navigation() {
                     handleNavClick(item.href)
                   }
                 }}
-                className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                  isActive(item.key)
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                }`}
+                className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${isActive(item.key)
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                  }`}
               >
                 {item.name}
               </Link>
@@ -118,7 +116,7 @@ export default function Navigation() {
 
           {/* Theme Toggle, Language Switcher & Mobile Menu */}
           <div className="flex items-center space-x-2">
-            <LanguageSwitcher />
+
 
             {mounted && (
               <Button
@@ -161,11 +159,10 @@ export default function Navigation() {
                           }
                           setIsOpen(false)
                         }}
-                        className={`px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-                          isActive(item.key)
-                            ? "text-primary bg-primary/10"
-                            : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                        }`}
+                        className={`px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${isActive(item.key)
+                          ? "text-primary bg-primary/10"
+                          : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                          }`}
                       >
                         {item.name}
                       </Link>

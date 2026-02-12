@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react"
 
-type Language = "en" | "vi"
+type Language = "en"
 
 interface LanguageContextType {
   language: Language
@@ -144,127 +144,7 @@ const translations = {
     "contact.brandDesc":
       "Software Engineer passionate about creating beautiful, functional applications that make a difference.",
   },
-  vi: {
-    /* ── Hero ── */
-    "hero.title": "Xin chào, tôi là Thắng",
-    "hero.subtitle": "Kỹ Sư Phần Mềm | Đam mê xây dựng ứng dụng thân thiện người dùng",
-    "hero.description":
-      "Tôi tạo ra các ứng dụng hiện đại, responsive sử dụng React, Next.js, TypeScript và các công nghệ khác. Luôn háo hức học công nghệ mới và giải quyết vấn đề phức tạp.",
-    "hero.viewWork": "Xem Dự Án",
-    "hero.contactMe": "Liên Hệ",
 
-    /* ── Nav ── */
-    "nav.home": "Trang Chủ",
-    "nav.about": "Giới Thiệu",
-    "nav.skills": "Kỹ Năng",
-    "nav.projects": "Dự Án",
-    "nav.certificates": "Chứng Chỉ",
-    "nav.community": "Cộng Đồng",
-    "nav.contact": "Liên Hệ",
-
-    /* ── Skills ── */
-    "skills.title": "Công Nghệ & Công Cụ",
-
-    /* ── Footer ── */
-    "footer.visitors": "Lượt Truy Cập",
-    "footer.madeWith": "Được tạo với",
-    "footer.using": "Next.js & Tailwind CSS",
-
-    /* ── About ── */
-    "about.title": "Giới Thiệu",
-    "about.subtitle": "Tìm hiểu thêm về tôi",
-    "about.description":
-      "Tôi là một kỹ sư phần mềm đam mê với nền tảng vững chắc về các công nghệ phát triển phần mềm hiện đại.",
-    "about.experience": "Kinh Nghiệm",
-    "about.education": "Học Vấn",
-    "about.skills": "Kỹ Năng",
-    "about.interests": "Sở Thích",
-    "about.contact": "Liên Hệ",
-    "about.intro":
-      "Xin chào! Tôi là Thắng, một kỹ sư phần mềm đam mê sống tại Thành phố Hồ Chí Minh, Việt Nam. Tôi khám phá tình yêu lập trình trong thời gian học đại học.",
-    "about.journey":
-      "Hành trình của tôi bắt đầu với những kiến thức cơ bản về lập trình và tôi nhanh chóng yêu thích phát triển phần mềm.",
-    "about.personal":
-      "Khi không code, bạn có thể tìm thấy tôi khám phá các quán cà phê mới, đi bộ đường mòn, hoặc đóng góp cho các dự án mã nguồn mở.",
-    "about.funFacts": "Sự Thật Thú Vị",
-    "about.coffee": "Tách cà phê mỗi tuần",
-    "about.languages": "Ngôn ngữ lập trình",
-    "about.passion": "Đam mê học hỏi",
-    "about.badges.coffee": "Người Yêu Cà Phê",
-    "about.badges.hiking": "Người Yêu Leo Núi",
-    "about.badges.opensource": "Người Đóng Góp Mã Nguồn Mở",
-    "about.badges.learner": "Người Học Liên Tục",
-    "about.badges.solver": "Người Giải Quyết Vấn Đề",
-    "about.interests.cleanCode": "Code Sạch",
-    "about.interests.cleanCodeDesc": "Viết code dễ bảo trì và dễ đọc",
-    "about.interests.uiux": "Thiết Kế UI/UX",
-    "about.interests.uiuxDesc": "Tạo ra trải nghiệm người dùng đẹp mắt",
-    "about.interests.performance": "Hiệu Suất",
-    "about.interests.performanceDesc": "Tối ưu hóa tốc độ và hiệu quả",
-    "about.interests.opensource": "Mã Nguồn Mở",
-    "about.interests.opensourceDesc": "Đóng góp cho cộng đồng lập trình viên",
-    "about.interests.flutter": "Phát Triển Mobile",
-    "about.interests.flutterDesc": "Xây dựng ứng dụng mobile đa nền tảng",
-
-    /* ── Projects ── */
-    "projects.title": "Dự Án Của Tôi",
-    "projects.subtitle": "Đây là một số dự án tôi đã làm.",
-    "projects.featured": "Dự Án Nổi Bật",
-    "projects.other": "Dự Án Khác",
-    "projects.pacman.title": "Pacman AI (DFS, BFS, UCS, A*)",
-    "projects.pacman.desc":
-      "Trò chơi Pacman ứng dụng AI triển khai các thuật toán tìm kiếm bằng Python.",
-    "projects.collaborate": "Quan Tâm Đến Việc Hợp Tác?",
-    "projects.collaborateDesc":
-      "Tôi luôn sẵn sàng thảo luận về các cơ hội mới và dự án thú vị.",
-    "projects.getInTouch": "Liên Hệ",
-    "projects.expenseTracker.title": "Ứng Dụng Theo Dõi Chi Tiêu",
-    "projects.expenseTracker.desc":
-      "Ứng dụng theo dõi chi tiêu full-stack với xác thực người dùng.",
-    "projects.weather.title": "Bảng Điều Khiển Thời Tiết",
-    "projects.weather.desc": "Ứng dụng thời tiết responsive hiển thị điều kiện hiện tại và dự báo 5 ngày.",
-    "projects.portfolio.title": "Website Portfolio",
-    "projects.portfolio.desc":
-      "Chính website này! Portfolio responsive được xây dựng với Next.js.",
-    "projects.ecommerce.title": "Cửa Hàng Thương Mại Điện Tử",
-    "projects.ecommerce.desc":
-      "Nền tảng thương mại điện tử hiện đại với danh mục sản phẩm, giỏ hàng.",
-
-    /* ── Contact ── */
-    "contact.title": "Liên Hệ",
-    "contact.subtitle":
-      "Tôi rất muốn nghe từ bạn! Dù bạn có dự án trong đầu, muốn hợp tác, hay chỉ muốn chào hỏi.",
-    "contact.sendMessage": "Gửi Tin Nhắn Cho Tôi",
-    "contact.contactInfo": "Thông Tin Liên Hệ",
-    "contact.connectWithMe": "Kết Nối Với Tôi",
-    "contact.letsCollaborate": "Hãy Hợp Tác",
-    "contact.alwaysInterested": "Tôi luôn quan tâm đến:",
-    "contact.frontendDev": "Dự án phát triển frontend",
-    "contact.openSource": "Đóng góp mã nguồn mở",
-    "contact.learning": "Cơ hội học tập",
-    "contact.mentorship": "Mentorship và networking",
-    "contact.followMe":
-      "Theo dõi tôi trên mạng xã hội để cập nhật các dự án mới nhất.",
-    "contact.name": "Tên",
-    "contact.email": "Email",
-    "contact.subject": "Tiêu Đề",
-    "contact.message": "Tin Nhắn",
-    "contact.send": "Gửi Tin Nhắn",
-    "contact.sending": "Đang Gửi...",
-    "contact.success": "Cảm ơn! Tin nhắn của bạn đã được gửi thành công.",
-    "contact.error": "Xin lỗi, có lỗi khi gửi tin nhắn. Vui lòng thử lại.",
-    "contact.placeholder.name": "Họ tên đầy đủ của bạn",
-    "contact.placeholder.email": "email.của.bạn@example.com",
-    "contact.placeholder.subject": "Về việc gì?",
-    "contact.placeholder.message": "Kể cho tôi về dự án của bạn hoặc chỉ chào hỏi!",
-    "contact.quickLinks": "Liên Kết Nhanh",
-    "contact.aboutMe": "Giới Thiệu",
-    "contact.myProjects": "Dự Án Của Tôi",
-    "contact.alwaysOpen": "Luôn mở cửa cho những cuộc trò chuyện và cơ hội thú vị.",
-    "contact.brand": "Thắng",
-    "contact.brandDesc":
-      "Kỹ Sư Phần Mềm đam mê tạo ra những ứng dụng đẹp, chức năng tạo nên sự khác biệt.",
-  },
 }
 
 // ═══════════════════════════════════════════════════════
