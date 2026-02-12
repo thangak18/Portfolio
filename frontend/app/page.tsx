@@ -289,7 +289,7 @@ export default function Home() {
             <div className="space-y-6">
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl shadow-xl">
                 <Image
-                  src="/personal.jpg"
+                  src="/Personal.jpg"
                   alt="Profile"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-500"

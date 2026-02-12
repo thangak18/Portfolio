@@ -297,7 +297,7 @@ export function VisitorProvider({ children }: { children: React.ReactNode }) {
       hasRecorded.current = true
 
       try {
-        const response = await fetch("http://localhost:4000/api/visitors", {
+        const response = await fetch("/api/visitors", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
         })
