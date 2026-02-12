@@ -83,7 +83,7 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <Button asChild variant="ghost" className="group p-0 hover:bg-transparent">
-            <Link href="/#projects" className="flex items-center gap-2 text-muted-foreground hover:text-primary">
+            <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-primary">
               <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
               Back to Home
             </Link>

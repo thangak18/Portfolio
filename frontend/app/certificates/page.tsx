@@ -13,7 +13,7 @@ export default function CertificatesPage() {
         <div className="container mx-auto px-4 py-20 min-h-screen">
             <div className="mb-12">
                 <Button asChild variant="ghost" className="mb-8 group">
-                    <Link href="/#certificates" className="flex items-center gap-2 text-muted-foreground hover:text-primary">
+                    <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-primary">
                         <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
                         Back to Home
                     </Link>

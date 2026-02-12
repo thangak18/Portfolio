@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             throw new Error("KV not configured");
         }
     } catch (error) {
-        console.warn("KV error or not configured, falling back to memory:", error);
+        // console.warn("KV warning suppressed in dev");
 
         // Fallback to memory
         if (!memoryVisitorIps.has(ip)) {
