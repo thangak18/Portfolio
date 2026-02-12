@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, Lock } from "lucide-react"
+import { ExternalLink, Github, Lock, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { useLanguage } from "@/lib/contexts"
@@ -81,6 +81,14 @@ export default function Projects() {
   return (
     <main className="container mx-auto px-4 py-20">
       <div className="max-w-7xl mx-auto">
+        <div className="mb-8">
+          <Button asChild variant="ghost" className="group p-0 hover:bg-transparent">
+            <Link href="/#projects" className="flex items-center gap-2 text-muted-foreground hover:text-primary">
+              <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+              Back to Home
+            </Link>
+          </Button>
+        </div>
         <h1 className="text-4xl font-bold mb-4 text-center animate-slide-up">{t('projects.title')}</h1>
         <p className="text-xl text-muted-foreground text-center mb-16 max-w-2xl mx-auto animate-slide-up-delay-1">
           {t('projects.subtitle')}
