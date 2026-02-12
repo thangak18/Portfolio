@@ -69,7 +69,7 @@ export default function Projects() {
       id: 7, title: "Personal Portfolio", category: "🎨 Web Design", featured: true,
       description: "A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features dark mode, internationalization, and smooth animations.",
       highlights: ["Responsive Design", "Dark Mode Support", "Internationalization (i18n)"],
-      technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Framer Motion"],
+      technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Framer Motion"],
       githubUrl: "https://github.com/thangak18/Portfolio", liveUrl: "https://portfolio-thangak18.vercel.app", isPrivate: false,
       image: "/A7.png"
     },
