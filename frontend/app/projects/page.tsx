@@ -32,7 +32,7 @@ export default function Projects() {
       id: 3, title: "Online Auction System", category: "🛒 E-commerce", featured: true,
       description: "A feature-rich online auction platform that allows users to bid on items in real-time. Includes user authentication, product management, and bidding history tracking.",
       highlights: ["Real-time bidding system", "User & Admin dashboards", "Secure payment integration"],
-      technologies: ["Java", "Spring Boot", "MySQL", "HTML5", "CSS3", "JavaScript"],
+      technologies: ["React", "Node.js", "PostgreSQL", "HTML5", "CSS3", "JavaScript"],
       githubUrl: "https://github.com/hungtmh/online-auction-system", liveUrl: "", isPrivate: false,
       image: "/A3.png"
     },
