@@ -17,7 +17,7 @@ export default function Projects() {
       description: "A full-stack Valentine's experience featuring an interactive frontend built with Angular, TypeScript and CSS, backed by a scalable Java Spring Boot application. Data is securely managed in MySQL, and the entire solution is containerized with Docker for easy deployment.",
       highlights: ["Interactive UI with romantic animations", "Robust Java Spring Boot Backend", "Containerized with Docker & MySQL Database"],
       technologies: ["Angular", "Java", "Spring Boot", "TypeScript", "MySQL", "Docker", "CSS", "HTML"],
-      githubUrl: "https://github.com/thangak18/Valentine-", liveUrl: "http://www.valentine-nhi.duckdns.org", isPrivate: true,
+      githubUrl: "https://github.com/thangak18/Valentine-", liveUrl: "", isPrivate: false,
       image: "/A1.png"
     },
     {
