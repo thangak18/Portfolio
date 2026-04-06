@@ -84,12 +84,12 @@ export default function Home() {
 
   const projects = [
     {
-      id: 1, title: "Valentine's Day Surprise", category: "❤️ Interactive", featured: true,
-      description: "A full-stack Valentine's experience featuring an interactive frontend built with Angular, TypeScript and CSS, backed by a scalable Java Spring Boot application. Data is securely managed in MySQL, and the entire solution is containerized with Docker for easy deployment.",
-      highlights: ["Interactive UI with romantic animations", "Robust Java Spring Boot Backend", "Containerized with Docker & MySQL Database"],
-      technologies: ["Angular", "Java", "Spring Boot", "TypeScript", "MySQL", "Docker", "CSS", "HTML"],
-      githubUrl: "https://github.com/thangak18/Valentine-", liveUrl: "", isPrivate: false,
-      image: "/A1.png"
+      id: 1, title: "ThreatLens", category: "🔐 Security", featured: true,
+      description: "A comprehensive threat intelligence and vulnerability management platform. Built with modern security practices, ThreatLens provides real-time threat analysis and vulnerability assessment capabilities to safeguard your systems.",
+      highlights: ["Real-time threat detection", "Vulnerability assessment & reporting", "Security risk analytics"],
+      technologies: ["Python", "React", "Node.js", "MongoDB", "Docker"],
+      githubUrl: "https://github.com/thtcsec/ThreatLens", liveUrl: "", isPrivate: false,
+      image: "/C8.jpeg"
     },
     {
       id: 2, title: "Instant Messaging System", category: "💬 Desktop App", featured: true,
