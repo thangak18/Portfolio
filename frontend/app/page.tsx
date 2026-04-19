@@ -75,9 +75,9 @@ export default function Home() {
 
   /* ── data ─────────────────────────────────────────────── */
   const skillCategories = [
-    { title: "Programming Languages", skills: ["C", "C++", "Python", "Java", "JavaScript", "TypeScript", "HTML5", "CSS3", "Swift"] },
-    { title: "Frameworks & Libraries", skills: ["React", "Next.js", "Node.js", "Express", "Tailwind CSS", "Vite"] },
-    { title: "Tools & Platforms", skills: ["Git", "GitHub", "Docker", "VS Code", "IntelliJ IDEA", "MongoDB", "SQL Server", "Firebase"] },
+    { title: "Programming Languages", skills: ["Java", "Python", "JavaScript", "TypeScript", "SQL", "HTML/CSS"] },
+    { title: "Frameworks & Libraries", skills: ["Spring Boot", "React", "Next.js", "FastAPI", "Node.js (Express)", "Tailwind CSS", "JavaFX"] },
+    { title: "Tools & Platforms", skills: ["Docker", "AWS", "Google Cloud", "Git/GitHub", "Postman", "Vercel"] },
     { title: "AI Tools", skills: ["ChatGPT", "Claude", "Gemini", "GitHub Copilot", "DeepSeek"] },
   ]
   const allSkills = skillCategories.flatMap(c => c.skills)
@@ -92,12 +92,12 @@ export default function Home() {
       image: "/C8.jpeg"
     },
     {
-      id: 2, title: "Instant Messaging System", category: "💬 Desktop App", featured: true,
-      description: "A robust desktop messaging application built with Java, featuring real-time communication. Download the demo, extract the zip, and run the ZaloClient app to experience it.",
-      highlights: ["Real-time messaging with Java Sockets", "Secure authentication & file transfer", "Desktop client for macOS and Windows"],
-      technologies: ["Java", "JavaFX", "Socket", "PostgreSQL", "Threads"],
-      githubUrl: "https://github.com/thangak18/Instant-Messaging-System-Project", liveUrl: "/InstantMessagingApp_macOS.zip", isPrivate: false,
-      image: "/A2.png"
+      id: 2, title: "EduVault", category: "🎓 Online Learning Platform", featured: true,
+      description: "A scalable online learning platform that integrates a Spring Boot backend API with a Next.js frontend for a consistent and modern learning experience.",
+      highlights: ["Integrated Spring Boot API with Next.js frontend", "Dockerized for environment consistency", "Deployed on AWS for high availability and scalability"],
+      technologies: ["Java (Spring Boot)", "Next.js", "PostgreSQL", "Docker", "AWS"],
+      githubUrl: "", liveUrl: "https://eduvault-frontend-159888619461.asia-southeast1.run.app/", isPrivate: true,
+      image: "/B1.png"
     },
     {
       id: 3, title: "Online Auction System", category: "🛒 E-commerce", featured: true,
@@ -314,10 +314,10 @@ export default function Home() {
               <div className="space-y-6">
                 <h3 className="text-3xl font-bold">Software Engineer & Cloud Enthusiast</h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  I&apos;m a Software Engineer with a strong foundation in Java, and Python, currently pursuing my degree in Information Technology at HCMUS. I am passionate about building scalable, high-performance applications and optimizing development workflows.
+                  Software Engineering student at HCMUS with a strong focus on Backend Development and scalable systems. Hands-on experience in designing and deploying full-stack applications, real-time communication platforms, and e-commerce systems using Spring Boot, FastAPI, and Docker.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  My focus is on mastering DevOps practices and Cloud technologies to deliver reliable software solutions. I am eager to contribute to innovative projects, expand my technical expertise, and drive value through efficient engineering.
+                  Dedicated to writing clean, maintainable, high-performance code and leveraging cloud technologies to optimize modern software solutions. I continuously improve API design and deployment workflows to build reliable products that scale effectively.
                 </p>
               </div>
 
@@ -386,13 +386,12 @@ export default function Home() {
               <CardContent>
                 <div className="flex flex-wrap gap-2">
                   {[
-                    { name: "C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
                     { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
                     { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
                     { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
                     { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-                    { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-                    { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+                    { name: "SQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+                    { name: "HTML/CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
                   ].map(s => (
                     <Badge key={s.name} variant="secondary" className="px-3 py-1.5 text-sm flex gap-2 items-center hover:bg-primary/10 cursor-default">
                       <Image src={s.icon} alt={s.name} width={16} height={16} /> {s.name}
@@ -410,11 +409,13 @@ export default function Home() {
               <CardContent>
                 <div className="flex flex-wrap gap-2">
                   {[
+                    { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
                     { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-                    { name: "Vite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg" },
+                    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+                    { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
+                    { name: "Node.js (Express)", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
                     { name: "Tailwind CSS", icon: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
-                    { name: "ASP.NET Core", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" },
-                    { name: "Entity Framework", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" },
+                    { name: "JavaFX", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
                   ].map(s => (
                     <Badge key={s.name} variant="secondary" className="px-3 py-1.5 text-sm flex gap-2 items-center hover:bg-primary/10 cursor-default">
                       <Image src={s.icon} alt={s.name} width={16} height={16} className="object-contain" /> {s.name}
@@ -432,20 +433,12 @@ export default function Home() {
               <CardContent>
                 <div className="flex flex-wrap gap-2">
                   {[
+                    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
                     { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
                     { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
-                    { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
-                    { name: "Nginx", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" },
-                    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-                    { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-                    { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
-                    { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
-                    { name: "SQL Server", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" },
-                    { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
-                    { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
-                    { name: "Visual Studio", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" },
-                    { name: "IntelliJ IDEA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" },
-                    { name: "Xcode", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xcode/xcode-original.svg" },
+                    { name: "Git/GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+                    { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
+                    { name: "Vercel", icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vercel.svg" },
                   ].map(s => (
                     <Badge key={s.name} variant="secondary" className="px-3 py-1.5 text-sm flex gap-2 items-center hover:bg-primary/10 cursor-default">
                       <Image src={s.icon} alt={s.name} width={16} height={16} /> {s.name}

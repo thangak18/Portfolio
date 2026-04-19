@@ -73,6 +73,14 @@ export default function Projects() {
       githubUrl: "https://github.com/thangak18/Portfolio", liveUrl: "https://portfolio-thangak18.vercel.app", isPrivate: false,
       image: "/A7.png"
     },
+    {
+      id: 8, title: "EduVault", category: "🎓 Online Learning Platform", featured: true,
+      description: "A scalable online learning platform that integrates a Spring Boot backend API with a Next.js frontend for a consistent and modern learning experience.",
+      highlights: ["Integrated Spring Boot API with Next.js frontend", "Dockerized for environment consistency", "Deployed on AWS for high availability and scalability"],
+      technologies: ["Java (Spring Boot)", "Next.js", "PostgreSQL", "Docker", "AWS"],
+      githubUrl: "", liveUrl: "https://eduvault-frontend-159888619461.asia-southeast1.run.app/", isPrivate: true,
+      image: "/B1.png"
+    },
   ]
 
   const featuredProjects = projects.filter((project) => project.featured)
