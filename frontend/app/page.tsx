@@ -1,4 +1,4 @@
-"use client"
+  "use client"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -8,13 +8,13 @@ import { Progress } from "@/components/ui/progress"
 import {
   ArrowRight, ArrowDown, Facebook, Github, Linkedin, Mail,
   MapPin, GraduationCap, ExternalLink, Code, Palette, Zap,
-  Heart, ChevronRight, Award, BookOpen, Users, Lock
+  Heart, ChevronRight, Award, BookOpen, Users, Lock, Trophy
 } from "lucide-react"
 import { LinkedInIcon, FacebookIcon, InstagramIcon, GoogleDevIcon } from "@/components/brand-icons"
 import Link from "next/link"
 import Image from "next/image"
 import { useLanguage, useVisitor } from "@/lib/contexts"
-import { certificates, communities } from "@/lib/data"
+import { certificates, communities, achievements } from "@/lib/data"
 import { useState, useEffect, useRef } from "react"
 
 /* ── Animated counter ─────────────────────────────────────── */
@@ -89,7 +89,7 @@ export default function Home() {
       highlights: ["Real-time threat detection", "Vulnerability assessment & reporting", "Security risk analytics"],
       technologies: ["Python", "React", "Node.js", "MongoDB", "Docker"],
       githubUrl: "https://github.com/thtcsec/ThreatLens", liveUrl: "", isPrivate: false,
-      image: "/C8.jpeg"
+      image: "/C8.jpg"
     },
     {
       id: 2, title: "EduVault", category: "🎓 Online Learning Platform", featured: true,
@@ -600,6 +600,42 @@ export default function Home() {
                 <Button asChild variant="outline" size="lg" className="group">
                   <Link href="/certificates">View All My Certifications<ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" /></Link>
                 </Button>
+              </div>
+            </div>
+
+            {/* Achievements Section underneath Certificates */}
+            <div className="mb-12 mt-20">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2"><Trophy className="h-5 w-5 text-primary" />🏆 Achievements</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                {achievements.map((a, i) => (
+                  <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                    <div className="relative w-full aspect-[4/3] bg-muted/20 border-b">
+                      {a.image ? (
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <div className="relative w-full h-full cursor-pointer hover:opacity-90 transition-opacity">
+                              <Image src={a.image} alt={a.title} fill className="object-contain p-4 transition-transform duration-500 group-hover:scale-105" />
+                            </div>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-4xl w-full p-0 overflow-hidden bg-transparent border-none shadow-none">
+                            <DialogTitle className="sr-only">{a.title}</DialogTitle>
+                            <div className="relative w-full h-[80vh]">
+                              <Image src={a.image} alt={a.title} fill className="object-contain" />
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-primary/10">
+                          <Trophy className="h-8 w-8 text-primary" />
+                        </div>
+                      )}
+                    </div>
+                    <CardContent className="p-5 text-left">
+                      <p className="text-sm font-semibold text-primary mb-1">{a.issuer}</p>
+                      <h4 className="font-bold text-lg leading-tight group-hover:text-primary/80 transition-colors">{a.title}</h4>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
 

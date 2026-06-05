@@ -18,7 +18,7 @@ export default function Projects() {
       highlights: ["Real-time threat detection", "Vulnerability assessment & reporting", "Security risk analytics"],
       technologies: ["Python", "React", "Node.js", "MongoDB", "Docker"],
       githubUrl: "https://github.com/thtcsec/ThreatLens", liveUrl: "", isPrivate: false,
-      image: "/C8.jpeg"
+      image: "/C8.jpg"
     },
     {
       id: 2, title: "Instant Messaging System", category: "💬 Desktop App", featured: true,
@@ -45,27 +45,6 @@ export default function Projects() {
       image: "/A4.png"
     },
     {
-      id: 5,
-      title: "Virtual Background",
-      category: "🤖 Computer Vision",
-      featured: true,
-      description: "A computer vision application that performs real-time background subtraction and replacement using MediaPipe. High-performance image processing for seamless virtual environment integration.",
-      highlights: ["Real-time background removal", "Optimized with MediaPipe", "Dynamic background replacement"],
-      technologies: ["Python", "OpenCV", "NumPy", "MediaPipe"],
-      githubUrl: "https://github.com/thangak18/Virtual-Background",
-      liveUrl: "",
-      isPrivate: true,
-      image: "/A5.png"
-    },
-    {
-      id: 6, title: "Pascal Learning Platform", category: "📚 Education", featured: true,
-      description: "An interactive platform for learning Pascal programming. Features code compilation, syntax highlighting, and educational resources.",
-      highlights: ["Interactive Code Editor", "Real-time Compilation", "Comprehensive Tutorials"],
-      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      githubUrl: "https://github.com/thangak18/Pascal", liveUrl: "https://pascal-ashen-kappa.vercel.app", isPrivate: false,
-      image: "/A6.png"
-    },
-    {
       id: 7, title: "Personal Portfolio", category: "🎨 Web Design", featured: true,
       description: "A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features dark mode, internationalization, and smooth animations.",
       highlights: ["Responsive Design", "Dark Mode Support", "Internationalization (i18n)"],
@@ -80,6 +59,22 @@ export default function Projects() {
       technologies: ["Java (Spring Boot)", "Next.js", "PostgreSQL", "Docker", "AWS"],
       githubUrl: "", liveUrl: "https://eduvault-frontend-159888619461.asia-southeast1.run.app/", isPrivate: true,
       image: "/B1.png"
+    },
+    {
+      id: 9, title: "Food Order App", category: "📱 Mobile App", featured: true,
+      description: "An Android mobile application for ordering food online. Features a user-friendly app interface for browsing menus, placing orders and managing cart.",
+      highlights: ["Native Android application", "Food browsing and ordering", "Cart management"],
+      technologies: ["Android", "Java", "XML"],
+      githubUrl: "https://github.com/hungtmh/Food-Order-App", liveUrl: "", isPrivate: false,
+      image: "/C21.jpg"
+    },
+    {
+      id: 10, title: "UNIHUB", category: "🔧 System Architecture", featured: true,
+      description: "A platform for managing and registering for workshops and events. This project was specifically built to practice and apply system design concepts and architectural patterns.",
+      highlights: ["Workshop management & registration", "Application of System Design", "Scalable architecture focus"],
+      technologies: ["System Design", "Full-Stack Development"],
+      githubUrl: "https://github.com/nvkhai238/UNIHUB", liveUrl: "", isPrivate: false,
+      image: "/C22.jpg"
     },
   ]
 
