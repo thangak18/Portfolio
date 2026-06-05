@@ -19,30 +19,28 @@ A modern, responsive portfolio website built with Next.js, TypeScript, and Tailw
 - **Smooth transitions** when switching languages
 
 ### 👥 Smart Visitor Counter
-- **IP-based tracking** - only counts unique visitors
+- **Profile view tracking** - every page load increments the counter
 - **Fixed position** at bottom-right corner
 - **Beautiful animations** with pulse and ping effects
-- **Real-time updates** via API
-- **Persistent storage** in JSON file
+- **Real-time updates** via CounterAPI
+- **Persistent storage** for static deployments
 - **Backdrop blur** glass effect
 
 ## 🚀 How Visitor Counter Works
 
-The visitor counter uses a smart IP-based tracking system:
+The visitor counter increments once per page load, including visits from the site owner:
 
-1. **API Endpoint**: `/api/visitors`
-   - `GET`: Returns current visitor count
-   - `POST`: Increments count only for new IP addresses
+1. **Counter Endpoint**:
+   - Uses CounterAPI at `https://api.counterapi.dev/v1`
+   - The `/up` endpoint increments the profile view count by 1
 
-2. **IP Detection**: 
-   - Checks `x-forwarded-for` header
-   - Falls back to `x-real-ip` and `cf-connecting-ip`
-   - Handles proxy and CDN scenarios
+2. **Static Deployment Support**:
+   - Works on GitHub Pages and other static hosts
+   - Does not require a Next.js API route
 
-3. **Data Storage**:
-   - Stores in `data/visitors.json`
-   - Tracks both count and IP addresses
-   - Prevents duplicate counting from same IP
+3. **Local UI Cache**:
+   - Saves the latest count in `localStorage`
+   - Avoids flashing back to zero after a refresh
 
 4. **UI Features**:
    - Fixed position at bottom-right
@@ -53,12 +51,12 @@ The visitor counter uses a smart IP-based tracking system:
 
 ## 🛠️ Technology Stack
 
-- **Next.js 15** - React framework
+- **Next.js 16** - React framework
 - **TypeScript** - Type safety
 - **Tailwind CSS** - Styling
 - **Lucide React** - Icons
 - **Context API** - State management
-- **File System** - Data persistence
+- **CounterAPI** - Static-friendly data persistence
 
 ## 📱 Responsive Design
 
@@ -84,30 +82,12 @@ The visitor counter uses a smart IP-based tracking system:
    npm run build
    ```
 
-## 📊 Visitor Counter API
-
-### GET `/api/visitors`
-Returns current visitor count:
-```json
-{
-  "count": 42
-}
-```
-
-### POST `/api/visitors`
-Increments count for new IP addresses:
-```json
-{
-  "count": 43
-}
-```
-
 ## 🎨 Customization
 
 - **Colors**: Modify CSS variables in `globals.css`
 - **Animations**: Add new keyframes in `globals.css`
 - **Translations**: Update `lib/contexts.tsx`
-- **Visitor Counter**: Modify `components/visitor-counter.tsx`
+- **Visitor Counter**: Modify `lib/contexts.tsx`
 
 ## 📝 License
 

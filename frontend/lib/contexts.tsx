@@ -16,6 +16,54 @@ interface VisitorContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 const VisitorContext = createContext<VisitorContextType | undefined>(undefined)
+const VISITOR_COUNTER_NAMESPACE =
+  process.env.NEXT_PUBLIC_VISITOR_COUNTER_NAMESPACE || "portfolio-thangak18"
+const VISITOR_COUNTER_NAME =
+  process.env.NEXT_PUBLIC_VISITOR_COUNTER_NAME || "profile-views"
+const VISITOR_COUNTER_URL = `https://api.counterapi.dev/v1/${encodeURIComponent(
+  VISITOR_COUNTER_NAMESPACE,
+)}/${encodeURIComponent(VISITOR_COUNTER_NAME)}`
+const VISITOR_COUNT_STORAGE_KEY = "portfolio-profile-views-count"
+
+let visitorRecordPromise: Promise<number | null> | null = null
+
+function getCountFromPayload(payload: unknown): number | null {
+  if (!payload || typeof payload !== "object") return null
+
+  const data = payload as { count?: unknown; value?: unknown }
+  const count = Number(data.count ?? data.value)
+
+  return Number.isFinite(count) && count >= 0 ? count : null
+}
+
+function readSavedVisitorCount() {
+  if (typeof window === "undefined") return 0
+
+  const savedCount = Number(window.localStorage.getItem(VISITOR_COUNT_STORAGE_KEY))
+  return Number.isFinite(savedCount) && savedCount >= 0 ? savedCount : 0
+}
+
+function saveVisitorCount(count: number) {
+  if (typeof window === "undefined") return
+
+  window.localStorage.setItem(VISITOR_COUNT_STORAGE_KEY, String(count))
+}
+
+async function recordProfileView() {
+  const response = await fetch(`${VISITOR_COUNTER_URL}/up`, {
+    method: "GET",
+    cache: "no-store",
+  })
+
+  if (!response.ok) return null
+
+  return getCountFromPayload(await response.json())
+}
+
+function getVisitorRecordPromise() {
+  visitorRecordPromise ??= recordProfileView()
+  return visitorRecordPromise
+}
 
 // ═══════════════════════════════════════════════════════
 // TRANSLATIONS
@@ -177,15 +225,16 @@ export function VisitorProvider({ children }: { children: React.ReactNode }) {
       hasRecorded.current = true
 
       try {
-        const response = await fetch("/api/visitors", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        })
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
-        const data = await response.json()
-        setVisitorCount(data.count)
+        const savedCount = readSavedVisitorCount()
+        if (savedCount > 0) setVisitorCount(savedCount)
+
+        const count = await getVisitorRecordPromise()
+        if (count !== null) {
+          saveVisitorCount(count)
+          setVisitorCount(count)
+        }
       } catch (error) {
-        console.error("Failed to record visit:", error)
+        console.warn("Visitor counter is temporarily unavailable:", error)
       }
     }
 
