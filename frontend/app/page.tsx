@@ -1,769 +1,670 @@
-  "use client"
+"use client"
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import {
-  ArrowRight, ArrowDown, Facebook, Github, Linkedin, Mail,
-  MapPin, GraduationCap, ExternalLink, Code, Palette, Zap,
-  Heart, ChevronRight, Award, BookOpen, Users, Lock, Trophy
-} from "lucide-react"
-import { LinkedInIcon, FacebookIcon, InstagramIcon, GoogleDevIcon } from "@/components/brand-icons"
-import Link from "next/link"
 import Image from "next/image"
-import { useLanguage, useVisitor } from "@/lib/contexts"
-import { certificates, communities, achievements } from "@/lib/data"
-import { useState, useEffect, useRef } from "react"
+import Link from "next/link"
+import { useEffect, useMemo, useRef, useState } from "react"
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUp,
+  Award,
+  BookOpen,
+  BriefcaseBusiness,
+  Calendar,
+  Check,
+  ChevronRight,
+  Cloud,
+  Code2,
+  Download,
+  ExternalLink,
+  Github,
+  GraduationCap,
+  Layers3,
+  Linkedin,
+  LockKeyhole,
+  Mail,
+  MapPin,
+  ServerCog,
+  Sparkles,
+  Trophy,
+  Users,
+} from "lucide-react"
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { achievements, certificates, communities, experiences } from "@/lib/data"
 
-/* ── Animated counter ─────────────────────────────────────── */
-function AnimatedCounter({ end, duration = 2000, suffix = "" }: { end: number; duration?: number; suffix?: string }) {
-  const [count, setCount] = useState(0)
-  const ref = useRef<HTMLSpanElement>(null)
+
+const projects = [
+  {
+    id: "threatlens",
+    title: "ThreatLens",
+    category: "Data" as const,
+    eyebrow: "Security intelligence platform",
+    description:
+      "A threat intelligence and vulnerability management platform that turns security signals into clear, actionable risk insights.",
+    highlights: ["Real-time threat detection", "Vulnerability assessment and reporting", "Security risk analytics"],
+    technologies: ["Python", "React", "Node.js", "MongoDB", "Docker"],
+    image: "/C8.jpg",
+    githubUrl: "https://github.com/thtcsec/ThreatLens",
+    liveUrl: "",
+    isPrivate: false,
+  },
+  {
+    id: "eduvault",
+    title: "EduVault",
+    category: "Software" as const,
+    eyebrow: "Cloud learning platform",
+    description:
+      "A scalable online learning platform connecting a Spring Boot API with a modern Next.js experience and a cloud-ready deployment workflow.",
+    highlights: ["Spring Boot and Next.js integration", "Containerized development environment", "Deployed on AWS"],
+    technologies: ["Spring Boot", "Next.js", "PostgreSQL", "Docker", "AWS"],
+    image: "/B1.png",
+    githubUrl: "",
+    liveUrl: "https://eduvault-frontend-159888619461.asia-southeast1.run.app/",
+    isPrivate: true,
+  },
+  {
+    id: "auction",
+    title: "Online Auction System",
+    category: "Software" as const,
+    eyebrow: "Real-time commerce experience",
+    description:
+      "A full-stack auction platform with real-time bidding, user and administrator workspaces, product management, and bidding history.",
+    highlights: ["Real-time bidding flow", "User and admin dashboards", "Payment-ready architecture"],
+    technologies: ["React", "Node.js", "PostgreSQL", "Tailwind CSS"],
+    image: "/A3.png",
+    githubUrl: "https://github.com/hungtmh/online-auction-system",
+    liveUrl: "",
+    isPrivate: false,
+  },
+]
+
+const skillGroups = [
+  {
+    number: "01",
+    title: "Languages",
+    icon: Code2,
+    skills: [
+      { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
+      { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+      { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+      { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+      { name: "SQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg" },
+      { name: "HTML / CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" }
+    ],
+  },
+  {
+    number: "02",
+    title: "Frameworks",
+    icon: Layers3,
+    skills: [
+      { name: "Spring Boot", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" },
+      { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "FastAPI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" },
+      { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+      { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" }
+    ],
+  },
+  {
+    number: "03",
+    title: "Cloud & Infrastructure",
+    icon: Cloud,
+    skills: [
+      { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+      { name: "AWS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "Google Cloud", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg" },
+      { name: "Vercel", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" },
+      { name: "Nginx", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" },
+      { name: "CI / CD", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" }
+    ],
+  },
+  {
+    number: "04",
+    title: "Data & Workflow",
+    icon: ServerCog,
+    skills: [
+      { name: "PostgreSQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+      { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
+      { name: "Git / GitHub", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
+      { name: "Postman", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" },
+      { name: "REST APIs", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg" },
+      { name: "AI Tools", logo: "" }
+    ],
+  },
+]
+
+const focusAreas = [
+  { icon: ServerCog, title: "Backend systems", text: "Reliable APIs, clear domain logic, and maintainable service architecture." },
+  { icon: Cloud, title: "Cloud delivery", text: "Containerized applications and practical deployment workflows." },
+  { icon: Layers3, title: "Full-stack products", text: "Cohesive experiences from data model to responsive interface." },
+]
+
+function RevealSection({
+  id,
+  className = "",
+  children,
+}: {
+  id: string
+  className?: string
+  children: React.ReactNode
+}) {
+  const ref = useRef<HTMLElement>(null)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true) }, { threshold: 0.3 })
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
+    const node = ref.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.unobserve(node)
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -60px" },
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    if (!visible) return
-    let n = 0
-    const inc = end / (duration / 16)
-    const t = setInterval(() => {
-      n += inc
-      if (n >= end) { setCount(end); clearInterval(t) } else setCount(Math.floor(n))
-    }, 16)
-    return () => clearInterval(t)
-  }, [visible, end, duration])
-
-  return <span ref={ref}>{count}{suffix}</span>
-}
-
-/* ── Section with scroll-reveal ───────────────────────────── */
-function Section({ id, children, className = "" }: { id: string; children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLElement>(null)
-  const [vis, setVis] = useState(false)
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.08 })
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
-  }, [])
   return (
-    <section id={id} ref={ref} className={`transition-all duration-1000 ${vis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"} ${className}`}>
+    <section ref={ref} id={id} className={`portfolio-section reveal-section ${visible ? "is-visible" : ""} ${className}`}>
       {children}
     </section>
   )
 }
 
-/* ══════════════════════════════════════════════════════════ */
-export default function Home() {
-  const { t } = useLanguage()
-  const { visitorCount } = useVisitor()
+function SectionHeading({ label, title, copy }: { number?: string; label: string; title: string; copy: string }) {
+  return (
+    <div className="section-heading">
+      <div className="section-kicker">
+        <Sparkles className="kicker-icon" />
+        <span>{label}</span>
+      </div>
+      <h2>{title}</h2>
+      <p>{copy}</p>
+    </div>
+  )
+}
 
-  /* typing effect */
-  const fullText = "Software Engineer"
-  const [typed, setTyped] = useState("")
+export default function Home() {
+
+  const [activeExperienceIndex, setActiveExperienceIndex] = useState(0)
+  const [showBackToTop, setShowBackToTop] = useState(false)
+  const shellRef = useRef<HTMLElement>(null)
+
   useEffect(() => {
-    let i = 0
-    const id = setInterval(() => { setTyped(fullText.slice(0, ++i)); if (i >= fullText.length) clearInterval(id) }, 80)
-    return () => clearInterval(id)
+    const onScroll = () => setShowBackToTop(window.scrollY > 650)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  /* ── data ─────────────────────────────────────────────── */
-  const skillCategories = [
-    { title: "Programming Languages", skills: ["Java", "Python", "JavaScript", "TypeScript", "SQL", "HTML/CSS"] },
-    { title: "Frameworks & Libraries", skills: ["Spring Boot", "React", "Next.js", "FastAPI", "Node.js (Express)", "Tailwind CSS", "JavaFX"] },
-    { title: "Tools & Platforms", skills: ["Docker", "AWS", "Google Cloud", "Git/GitHub", "Postman", "Vercel"] },
-    { title: "AI Tools", skills: ["ChatGPT", "Claude", "Gemini", "GitHub Copilot", "DeepSeek"] },
-  ]
-  const allSkills = skillCategories.flatMap(c => c.skills)
+  useEffect(() => {
+    const shell = shellRef.current
+    if (!shell) return
 
-  const projects = [
-    {
-      id: 1, title: "ThreatLens", category: "🔐 Security", featured: true,
-      description: "A comprehensive threat intelligence and vulnerability management platform. Built with modern security practices, ThreatLens provides real-time threat analysis and vulnerability assessment capabilities to safeguard your systems.",
-      highlights: ["Real-time threat detection", "Vulnerability assessment & reporting", "Security risk analytics"],
-      technologies: ["Python", "React", "Node.js", "MongoDB", "Docker"],
-      githubUrl: "https://github.com/thtcsec/ThreatLens", liveUrl: "", isPrivate: false,
-      image: "/C8.jpg"
-    },
-    {
-      id: 2, title: "EduVault", category: "🎓 Online Learning Platform", featured: true,
-      description: "A scalable online learning platform that integrates a Spring Boot backend API with a Next.js frontend for a consistent and modern learning experience.",
-      highlights: ["Integrated Spring Boot API with Next.js frontend", "Dockerized for environment consistency", "Deployed on AWS for high availability and scalability"],
-      technologies: ["Java (Spring Boot)", "Next.js", "PostgreSQL", "Docker", "AWS"],
-      githubUrl: "", liveUrl: "https://eduvault-frontend-159888619461.asia-southeast1.run.app/", isPrivate: true,
-      image: "/B1.png"
-    },
-    {
-      id: 3, title: "Online Auction System", category: "🛒 E-commerce", featured: true,
-      description: "A feature-rich online auction platform that allows users to bid on items in real-time. Includes user authentication, product management, and bidding history tracking.",
-      highlights: ["Real-time bidding system", "User & Admin dashboards", "Payment integration"],
-      technologies: ["React", "Node.js", "PostgreSQL", "HTML5", "CSS", "JavaScript", "Tailwind CSS"],
-      githubUrl: "https://github.com/hungtmh/online-auction-system", liveUrl: "", isPrivate: false,
-      image: "/A3.png"
-    },
-  ]
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const coarsePointer = window.matchMedia("(pointer: coarse)")
+    let animationFrame = 0
 
-  /* ═══════════════════════  JSX  ═══════════════════════════ */
+    const updateScrollMotion = () => {
+      cancelAnimationFrame(animationFrame)
+      animationFrame = requestAnimationFrame(() => {
+        const progress = Math.min(window.scrollY / Math.max(window.innerHeight, 1), 1)
+        shell.style.setProperty("--hero-progress", progress.toFixed(3))
+      })
+    }
+
+    const updatePointerMotion = (event: PointerEvent) => {
+      if (reducedMotion.matches || coarsePointer.matches) return
+
+      shell.style.setProperty("--pointer-x", `${event.clientX}px`)
+      shell.style.setProperty("--pointer-y", `${event.clientY}px`)
+
+      const target = event.target as HTMLElement | null
+      const card = target?.closest<HTMLElement>("[data-glow-card]")
+      if (!card) return
+
+      const rect = card.getBoundingClientRect()
+      card.style.setProperty("--card-x", `${event.clientX - rect.left}px`)
+      card.style.setProperty("--card-y", `${event.clientY - rect.top}px`)
+    }
+
+    updateScrollMotion()
+    window.addEventListener("scroll", updateScrollMotion, { passive: true })
+    window.addEventListener("pointermove", updatePointerMotion, { passive: true })
+
+    return () => {
+      cancelAnimationFrame(animationFrame)
+      window.removeEventListener("scroll", updateScrollMotion)
+      window.removeEventListener("pointermove", updatePointerMotion)
+    }
+  }, [])
+
+  const movePortrait = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches) return
+    const rect = event.currentTarget.getBoundingClientRect()
+    const x = (event.clientX - rect.left) / rect.width - 0.5
+    const y = (event.clientY - rect.top) / rect.height - 0.5
+    event.currentTarget.style.setProperty("--portrait-tilt-x", `${(-y * 3.2).toFixed(2)}deg`)
+    event.currentTarget.style.setProperty("--portrait-tilt-y", `${(x * 3.2).toFixed(2)}deg`)
+  }
+
+  const resetPortrait = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.style.setProperty("--portrait-tilt-x", "0deg")
+    event.currentTarget.style.setProperty("--portrait-tilt-y", "0deg")
+  }
+
+
   return (
-    <main className="min-h-screen">
+    <main ref={shellRef} className="portfolio-shell">
+      <section id="home" className="hero-section">
+        <div className="hero-grid-pattern" aria-hidden="true" />
+        <div style={{ width: '100%' }}>
+          <div className="portfolio-container hero-layout">
+          <div className="hero-copy">
 
-      {/* ====== HERO ====== */}
-      <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-        {/* animated background blobs */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" style={{ animationDelay: "1.5s" }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-        </div>
 
-        <div className="container mx-auto px-4 relative z-10 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-
-            {/* ── LEFT: Text content ── */}
-            <div className="space-y-6">
-              {/* Role badge */}
-              <div className="animate-fade-in">
-                <Badge className="px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/15">
-                  <Code className="h-4 w-4 mr-2" />
-                  Software Engineering
-                </Badge>
-              </div>
-
-              {/* Main title */}
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-slide-up">
-                Hi, I&apos;m{" "}
-                <span className="bg-gradient-to-r from-primary via-blue-500 to-primary bg-clip-text text-transparent animate-gradient">
-                  Thang
-                </span>
+            <div>
+              <p className="hero-overline">Software Engineering · HCMUS</p>
+              <h1>
+                Hi, I&apos;m <span>Nguyen Tan Thang.</span>
               </h1>
-
-              {/* Typing subtitle */}
-              <div className="flex items-center gap-3 text-xl md:text-2xl text-muted-foreground animate-slide-up-delay-1">
-                <span className="text-primary font-mono">&lt;/&gt;</span>
-                <span className="font-mono">
-                  {typed}<span className="animate-pulse text-primary">|</span>
-                </span>
-              </div>
-
-              {/* Description */}
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg animate-slide-up-delay-2">
-                IT Specialist focused on Software Engineering and Development. Currently pursuing Information Technology at HCMUS.
-              </p>
-
-              {/* Academic progress */}
-              <div className="max-w-sm animate-slide-up-delay-2">
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-muted-foreground">Academic Journey</span>
-                  <span className="font-semibold text-primary">80%</span>
-                </div>
-                <Progress value={80} className="h-2.5 mb-1" />
-                <p className="text-xs text-muted-foreground">Semester 7/12 • Currently Studying</p>
-              </div>
-
-              {/* CTA buttons */}
-              <div className="flex flex-wrap gap-4 animate-slide-up-delay-3">
-                <Button asChild size="lg" className="group px-8 rounded-full">
-                  <Link href="#projects">
-                    {t("hero.viewWork")}
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="group px-8 rounded-full">
-                  <Link href="#contact">{t("hero.contactMe")}</Link>
-                </Button>
-              </div>
-
-              {/* Social icons */}
-              <div className="flex space-x-3 animate-slide-up-delay-4">
-                {[
-                  { href: "https://github.com/thangak18", icon: Github, label: "GitHub" },
-                  { href: "https://www.linkedin.com/in/th%E1%BA%AFng-nguy%E1%BB%85n-598741283/", icon: Linkedin, label: "LinkedIn" },
-                  { href: "https://www.facebook.com/nguyen.thang.739214/", icon: Facebook, label: "Facebook" },
-                  { href: "mailto:thangak18@gmail.com", icon: Mail, label: "Email" },
-                ].map((s) => (
-                  <Link key={s.label} href={s.href}
-                    className="p-3 rounded-full border bg-background/50 hover:bg-primary/10 hover:border-primary/30 hover:text-primary text-muted-foreground transition-all duration-300 hover:scale-110 hover:-translate-y-1"
-                    target={s.href.startsWith("mailto") ? undefined : "_blank"}>
-                    <s.icon className="h-5 w-5" />
-                  </Link>
-                ))}
-              </div>
             </div>
 
-            {/* ── RIGHT: Code editor card ── */}
-            <div className="hidden lg:block animate-slide-up-delay-2">
-              <div className="relative">
-                {/* Glow effect behind card */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-blue-500/20 to-primary/20 rounded-3xl blur-2xl opacity-50" />
-
-                {/* Code editor window */}
-                <div className="relative bg-card border rounded-2xl shadow-2xl overflow-hidden">
-                  {/* Title bar */}
-                  <div className="flex items-center justify-between px-4 py-3 bg-muted/50 border-b">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-500" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                      <div className="w-3 h-3 rounded-full bg-green-500" />
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
-                      <span className="text-primary">&gt;_</span>
-                      <span>developer.ts</span>
-                    </div>
-                    <div className="w-16" />
-                  </div>
-
-                  {/* Code content */}
-                  <div className="p-6 font-mono text-sm leading-7">
-                    <div className="flex">
-                      <span className="text-muted-foreground/50 w-8 text-right mr-4 select-none">1</span>
-                      <span><span className="text-blue-500">const</span> <span className="text-foreground">developer</span> <span className="text-muted-foreground">=</span> <span className="text-muted-foreground">{"{"}</span></span>
-                    </div>
-                    <div className="flex">
-                      <span className="text-muted-foreground/50 w-8 text-right mr-4 select-none">2</span>
-                      <span className="ml-6"><span className="text-primary">name</span><span className="text-muted-foreground">:</span> <span className="text-green-500">&quot;Nguyen Thang&quot;</span><span className="text-muted-foreground">,</span></span>
-                    </div>
-                    <div className="flex">
-                      <span className="text-muted-foreground/50 w-8 text-right mr-4 select-none">3</span>
-                      <span className="ml-6"><span className="text-primary">role</span><span className="text-muted-foreground">:</span> <span className="text-green-500">&quot;Software Engineer&quot;</span><span className="text-muted-foreground">,</span></span>
-                    </div>
-                    <div className="flex">
-                      <span className="text-muted-foreground/50 w-8 text-right mr-4 select-none">4</span>
-                      <span className="ml-6"><span className="text-primary">skills</span><span className="text-muted-foreground">:</span> <span className="text-muted-foreground">[</span><span className="text-orange-500">&apos;Java&apos;</span><span className="text-muted-foreground">,</span> <span className="text-orange-500">&apos;Python&apos;</span><span className="text-muted-foreground">,</span> <span className="text-orange-500">&apos;C#&apos;</span><span className="text-muted-foreground">,</span> <span className="text-orange-500">&apos;DevOps&apos;</span><span className="text-muted-foreground">,</span> <span className="text-orange-500">&apos;Cloud&apos;</span><span className="text-muted-foreground">],</span></span>
-                    </div>
-                    <div className="flex">
-                      <span className="text-muted-foreground/50 w-8 text-right mr-4 select-none">5</span>
-                      <span className="ml-6"><span className="text-primary">passion</span><span className="text-muted-foreground">:</span> <span className="text-green-500">&apos;Building amazing apps&apos;</span><span className="text-muted-foreground">,</span></span>
-                    </div>
-                    <div className="flex">
-                      <span className="text-muted-foreground/50 w-8 text-right mr-4 select-none">6</span>
-                      <span className="ml-6"><span className="text-primary">available</span><span className="text-muted-foreground">:</span> <span className="text-blue-500">true</span></span>
-                    </div>
-                    <div className="flex">
-                      <span className="text-muted-foreground/50 w-8 text-right mr-4 select-none">7</span>
-                      <span><span className="text-muted-foreground">{"}"}</span><span className="text-muted-foreground">;</span></span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating terminal button */}
-                <div className="absolute -bottom-3 -left-3 bg-card border rounded-xl shadow-lg p-3 animate-float" style={{ animationDelay: "0.5s" }}>
-                  <span className="text-primary font-mono text-lg">&gt;_</span>
-                </div>
-
-                {/* Floating code button */}
-                <div className="absolute -top-3 -right-3 bg-primary text-primary-foreground rounded-xl shadow-lg p-3 animate-float" style={{ animationDelay: "1s" }}>
-                  <Code className="h-5 w-5" />
-                </div>
-              </div>
+            <div className="hero-role">
+              <Code2 aria-hidden="true" />
+              <span>Software Engineer</span>
             </div>
 
+            <p className="hero-description">
+              I build reliable backend systems and modern digital products, with a focus on scalable APIs, cloud technologies,
+              and thoughtful full-stack experiences.
+            </p>
+
+            <div className="hero-actions">
+              <Link href="#projects" className="portfolio-button portfolio-button-primary">
+                View projects <ArrowRight />
+              </Link>
+              <Link href="/immersive" className="portfolio-button portfolio-button-secondary">
+                <Sparkles /> Zen Space
+              </Link>
+            </div>
+
+            <div className="hero-socials" aria-label="Social links">
+              <Link href="https://github.com/thangak18" target="_blank" aria-label="GitHub"><Github /></Link>
+              <Link href="https://www.linkedin.com/in/th%E1%BA%AFng-nguy%E1%BB%85n-598741283/" target="_blank" aria-label="LinkedIn"><Linkedin /></Link>
+              <Link href="mailto:thangak18@gmail.com" aria-label="Email"><Mail /></Link>
+              <span className="hero-location"><MapPin /> Ho Chi Minh City, Vietnam</span>
+            </div>
           </div>
 
-          {/* Scroll hint */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <Link href="#about" className="text-muted-foreground hover:text-primary transition-colors flex flex-col items-center gap-2">
-              <span className="text-xs">Scroll Down</span>
-              <ArrowDown className="h-4 w-4" />
+          <div className="hero-visual" aria-label="Nguyen Tan Thang profile" onPointerMove={movePortrait} onPointerLeave={resetPortrait}>
+            <div className="portrait-orbit portrait-orbit-one" aria-hidden="true" />
+            <div className="portrait-orbit portrait-orbit-two" aria-hidden="true" />
+            <div className="portrait-frame">
+              <div className="portrait-meta portrait-meta-top">
+                <span>HCMUS</span>
+                <span>EST. 2027</span>
+              </div>
+              <Image src="/Personal.jpg" alt="Nguyen Tan Thang" fill priority sizes="(max-width: 768px) 86vw, 430px" />
+              <div className="portrait-fade" aria-hidden="true" />
+            </div>
+
+            <div className="profile-terminal">
+              <div className="terminal-bar">
+                <div><span /><span /><span /></div>
+                <span>profile.json</span>
+                <span className="terminal-status"><i /> online</span>
+              </div>
+              <div className="terminal-code">
+                <p><b>"name"</b>: <span>"Nguyen Tan Thang"</span>,</p>
+                <p><b>"role"</b>: <span>"Software Engineer"</span>,</p>
+                <p><b>"focus"</b>: [<span>"Backend"</span>, <span>"Cloud"</span>],</p>
+                <p><b>"available"</b>: <em>true</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="portfolio-container" style={{ marginTop: '64px', marginBottom: '64px' }}>
+          <div className="focus-list">
+            {focusAreas.map((focus) => (
+              <div className="focus-item" key={focus.title}>
+                <div><focus.icon /></div>
+                <span><strong>{focus.title}</strong><small>{focus.text}</small></span>
+              </div>
+            ))}
+          </div>
+        </div>
+        </div>
+
+        <Link href="#experience" className="scroll-cue">
+          <span>Scroll to explore</span>
+          <ArrowDown />
+        </Link>
+      </section>
+
+      <div className="profile-strip">
+        <div className="portfolio-container profile-strip-grid">
+          {[
+            [GraduationCap, "Current", "Software Engineering student"],
+            [BookOpen, "University", "HCMUS"],
+            [ServerCog, "Focus", "Backend & cloud systems"],
+            [BriefcaseBusiness, "Graduation", "Expected 2027"],
+          ].map(([Icon, label, value]) => {
+            const IconComponent = Icon as typeof GraduationCap
+            return (
+              <div className="profile-strip-item" key={label as string}>
+                <IconComponent />
+                <div><span>{label as string}</span><strong>{value as string}</strong></div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+
+      <RevealSection id="journey" className="section-surface">
+        <div className="portfolio-container">
+          <SectionHeading
+            number="02"
+            label="Journey"
+            title="A foundation built one deliberate step at a time."
+            copy="My academic path is where software fundamentals, real projects, and a growing interest in cloud systems come together."
+          />
+
+          <div className="journey-panel" data-glow-card>
+            <div className="journey-progress"><span /></div>
+            <div className="journey-steps">
+              <div className="journey-step is-complete">
+                <span><Check /></span>
+                <small>Foundation</small>
+                <strong>Programming & data structures</strong>
+                <p>Core engineering thinking and problem solving.</p>
+              </div>
+              <div className="journey-step is-complete">
+                <span><Check /></span>
+                <small>Applied systems</small>
+                <strong>Backend & full-stack projects</strong>
+                <p>From API design to usable product experiences.</p>
+              </div>
+              <div className="journey-step is-current">
+                <span>07</span>
+                <small>Now</small>
+                <strong>Semester 7 of 12</strong>
+                <p>Deepening cloud, deployment, and system design skills.</p>
+              </div>
+              <div className="journey-step">
+                <span><GraduationCap /></span>
+                <small>Next milestone</small>
+                <strong>Graduate in 2027</strong>
+                <p>Ready to contribute to ambitious engineering teams.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </RevealSection>
+
+      <RevealSection id="experience">
+        <div className="portfolio-container">
+          <SectionHeading
+            label="Experience"
+            title="Work Experience"
+            copy="Professional roles and technical contract projects"
+          />
+
+          <div className="experience-layout">
+            <div className="experience-tabs" role="tablist">
+              {experiences.map((exp, index) => (
+                <button
+                  key={exp.company}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeExperienceIndex === index}
+                  className={`experience-tab ${activeExperienceIndex === index ? "is-active" : ""}`}
+                  onClick={() => setActiveExperienceIndex(index)}
+                >
+                  <div className="experience-logo">
+                    <Image src={exp.logo} alt={exp.company} fill sizes="32px" />
+                  </div>
+                  <span>{exp.company}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="experience-card" data-glow-card>
+              {experiences.length > 0 && (
+                <div className="experience-card-inner">
+                  <div className="experience-card-header">
+                    <h3>{experiences[activeExperienceIndex].company}</h3>
+                    <span className="experience-date-badge">
+                      <Calendar className="experience-date-icon" />
+                      {experiences[activeExperienceIndex].date}
+                    </span>
+                  </div>
+                  <div className="experience-location">
+                    <MapPin /> {experiences[activeExperienceIndex].location}
+                  </div>
+
+                  <hr className="experience-divider" />
+
+                  <div className="experience-role-header">
+                    <h4>{experiences[activeExperienceIndex].role}</h4>
+                    {experiences[activeExperienceIndex].duration && <span>{experiences[activeExperienceIndex].duration}</span>}
+                  </div>
+
+                  <ul className="experience-bullets">
+                    {experiences[activeExperienceIndex].descriptions.map((desc, i) => (
+                      <li key={i}>{desc}</li>
+                    ))}
+                  </ul>
+
+                  <div className="experience-tags">
+                    {experiences[activeExperienceIndex].technologies.map(tech => (
+                      <span key={tech}>{tech}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </RevealSection>
+
+      <RevealSection id="skills">
+        <div className="portfolio-container">
+          <SectionHeading
+            number="03"
+            label="Capabilities"
+            title="The tools I use to move from idea to reliable system."
+            copy="A practical toolkit shaped by building, shipping, debugging, and learning across the stack."
+          />
+
+          <div className="skills-grid">
+            {skillGroups.map((group) => (
+              <article className="skill-panel" key={group.title} data-glow-card>
+                <div className="skill-panel-head">
+                  <span>{group.number}</span>
+                  <group.icon />
+                </div>
+                <h3>{group.title}</h3>
+                <div className="skill-list">
+                  {group.skills.map((skill) => (
+                    <span key={skill.name}>
+                      {skill.logo && <img src={skill.logo} alt={skill.name} width={16} height={16} className="skill-logo" loading="lazy" />}
+                      {skill.name}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </RevealSection>
+
+      <RevealSection id="projects" className="section-surface">
+        <div className="portfolio-container">
+          <SectionHeading
+            number="04"
+            label="Selected work"
+            title="Projects shaped by real technical decisions."
+            copy="A focused selection of systems where backend architecture, product thinking, and dependable delivery matter."
+          />
+
+          <div className="projects-list">
+            {projects.map((project, index) => (
+              <article className="project-feature" key={project.id} data-glow-card>
+                <div className="project-media">
+                  <Image src={project.image} alt={`${project.title} interface`} fill sizes="(max-width: 900px) 100vw, 650px" />
+                  <div className="project-media-overlay" />
+                  <span className="project-index">0{projects.findIndex((item) => item.id === project.id) + 1}</span>
+                </div>
+                <div className="project-copy">
+                  <div className="project-category"><span>{project.category}</span><span>{project.eyebrow}</span></div>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <ul>
+                    {project.highlights.map((highlight) => <li key={highlight}><Check /> {highlight}</li>)}
+                  </ul>
+                  <div className="project-tech">
+                    {project.technologies.map((tech) => <span key={tech}>{tech}</span>)}
+                  </div>
+                  <div className="project-actions">
+                    {project.githubUrl ? (
+                      <Link href={project.githubUrl} target="_blank"><Github /> Source code <ExternalLink /></Link>
+                    ) : (
+                      <span className="private-project"><LockKeyhole /> Private repository</span>
+                    )}
+                    {project.liveUrl && <Link href={project.liveUrl} target="_blank">Live experience <ArrowRight /></Link>}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="section-cta">
+            <Link href="/projects" className="portfolio-button portfolio-button-secondary">
+              Explore all projects <ChevronRight />
             </Link>
           </div>
         </div>
-      </section>
+      </RevealSection>
 
-      {/* ====== ABOUT ====== */}
-      <Section id="about" className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 px-4 py-1">About Me</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Professional Background</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Passionate about technology, software development, and building innovative solutions</p>
-          </div>
+      <RevealSection id="certificates">
+        <div className="portfolio-container">
+          <SectionHeading
+            number="05"
+            label="Credentials"
+            title="Evidence of continuous learning and meaningful progress."
+            copy="Certificates build the foundation. Achievements show what happens when that learning is put into practice."
+          />
 
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column: Image & University */}
-            <div className="space-y-6">
-              <div className="relative aspect-square w-full overflow-hidden rounded-2xl shadow-xl">
-                <Image
-                  src="/Personal.jpg"
-                  alt="Profile"
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
-              <Card className="bg-primary/5 border-primary/10">
-                <CardContent className="p-4 flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-1 shadow-sm shrink-0">
-                    <Image src="/logo.jpeg" alt="HCMUS" width={40} height={40} className="object-contain" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-lg">HCMUS</h4>
-                    <p className="text-sm text-muted-foreground">Software Engineer</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Right Column: Bio */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h3 className="text-3xl font-bold">Software Engineer & Cloud Enthusiast</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Software Engineering student at HCMUS with a strong focus on Backend Development and scalable systems. Hands-on experience in designing and deploying full-stack applications, real-time communication platforms, and e-commerce systems using Spring Boot, FastAPI, and Docker.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Dedicated to writing clean, maintainable, high-performance code and leveraging cloud technologies to optimize modern software solutions. I continuously improve API design and deployment workflows to build reliable products that scale effectively.
-                </p>
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* ====== SKILLS ====== */}
-      <Section id="skills" className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 px-4 py-1">Expertise</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Technologies &amp; Tools</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Proficient in modern development tools and technologies</p>
-          </div>
-
-          {/* Marquee with Logos */}
-          <div className="relative overflow-hidden mb-16 py-8">
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
-
-            <div className="flex animate-marquee whitespace-nowrap gap-12 items-center">
-              {[
-                { name: "Python", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-                { name: "JavaScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-                { name: "TypeScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-                { name: "HTML5", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-                { name: "CSS3", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-                { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-                { name: "Tailwind CSS", src: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
-                { name: "Figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-                { name: "Git", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-                { name: "Docker", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-                // Duplicate for seamless loop
-                { name: "Python", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-                { name: "JavaScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-                { name: "TypeScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-                { name: "HTML5", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-                { name: "CSS3", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-                { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-                { name: "Tailwind CSS", src: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
-                { name: "Figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-                { name: "Git", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-                { name: "Docker", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-              ].map((tool, i) => (
-                <div key={i} className="flex flex-col items-center gap-3 bg-card border rounded-xl p-6 min-w-[140px] shadow-sm hover:shadow-md transition-shadow">
-                  <div className="relative w-12 h-12">
-                    <Image src={tool.src} alt={tool.name} fill className="object-contain" />
-                  </div>
-                  <span className="font-semibold text-sm">{tool.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Skill Categories Grid */}
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-            {/* Programming Languages */}
-            <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <CardHeader>
-                <CardTitle className="text-lg font-bold">Programming Languages</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-                    { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-                    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-                    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-                    { name: "SQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
-                    { name: "HTML/CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-                  ].map(s => (
-                    <Badge key={s.name} variant="secondary" className="px-3 py-1.5 text-sm flex gap-2 items-center hover:bg-primary/10 cursor-default">
-                      <Image src={s.icon} alt={s.name} width={16} height={16} /> {s.name}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Frameworks & Libraries */}
-            <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <CardHeader>
-                <CardTitle className="text-lg font-bold">Frameworks & Libraries</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
-                    { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-                    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-                    { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
-                    { name: "Node.js (Express)", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-                    { name: "Tailwind CSS", icon: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
-                    { name: "JavaFX", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-                  ].map(s => (
-                    <Badge key={s.name} variant="secondary" className="px-3 py-1.5 text-sm flex gap-2 items-center hover:bg-primary/10 cursor-default">
-                      <Image src={s.icon} alt={s.name} width={16} height={16} className="object-contain" /> {s.name}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Tools & Platforms */}
-            <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <CardHeader>
-                <CardTitle className="text-lg font-bold">Tools & Platforms</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-                    { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-                    { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
-                    { name: "Git/GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-                    { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
-                    { name: "Vercel", icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vercel.svg" },
-                  ].map(s => (
-                    <Badge key={s.name} variant="secondary" className="px-3 py-1.5 text-sm flex gap-2 items-center hover:bg-primary/10 cursor-default">
-                      <Image src={s.icon} alt={s.name} width={16} height={16} /> {s.name}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-
-            {/* AI Tools */}
-            <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <CardHeader>
-                <CardTitle className="text-lg font-bold">AI Tools</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    { name: "ChatGPT", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
-                    { name: "Gemini", icon: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" },
-                    { name: "DeepSeek", icon: "https://avatars.githubusercontent.com/u/146604297?s=200&v=4" }, // Correct DeepSeek org logo on GitHub
-                    { name: "Perplexity", icon: "https://upload.wikimedia.org/wikipedia/commons/1/1d/Perplexity_AI_logo.svg" },
-                    { name: "Cursor", icon: "https://avatars.githubusercontent.com/u/126786655?s=200&v=4" }, // Cursor AI logo
-                    { name: "Antigravity", icon: "https://cdn-icons-png.flaticon.com/512/3468/3468087.png" }, // Using a "Rocket" or "Future" icon for Antigravity
-                  ].map(s => (
-                    <Badge key={s.name} variant="secondary" className="px-3 py-1.5 text-sm flex gap-2 items-center hover:bg-primary/10 cursor-default">
-                      <Image src={s.icon} alt={s.name} width={16} height={16} className="object-contain" /> {s.name}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* AI Tools Section - Previous position (removed) */}
-
-
-        </div>
-      </Section>
-
-      {/* ====== PROJECTS ====== */}
-      <Section id="projects" className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 px-4 py-1">Projects</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Work</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">A selection of my best projects</p>
-          </div>
-
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.filter(p => p.featured).map((proj) => (
-              <Card key={proj.id} className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                <div className="p-4 pb-0 flex items-center justify-between">
-                  <Badge variant="outline" className="text-xs">{proj.category}</Badge>
-                  <Badge className="bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border-yellow-500/30 text-xs">⭐ Featured</Badge>
-                </div>
-                {/* @ts-ignore */}
-                {proj.image && (
-                  <div className="relative w-full aspect-video mt-2">
-                    {/* @ts-ignore */}
-                    <Image src={proj.image} alt={proj.title} fill className="object-cover" />
-                  </div>
-                )}
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg group-hover:text-primary transition-colors">{proj.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground leading-relaxed">{proj.description}</p>
-                  <ul className="space-y-1">
-                    {proj.highlights.map((h, i) => (
-                      <li key={i} className="text-xs text-muted-foreground flex items-start gap-2">
-                        <span className="text-primary mt-0.5">•</span>{h}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-1.5">
-                    {proj.technologies.map((t) => (
-                      <Badge key={t} variant="secondary" className="text-xs px-2 py-0.5">{t}</Badge>
-                    ))}
-                  </div>
-                  <div className="flex gap-2 pt-2">
-                    {proj.isPrivate ? (
-                      <Button variant="outline" size="sm" className="flex-1 cursor-not-allowed opacity-80" disabled>
-                        <Lock className="h-3.5 w-3.5 mr-1.5" /> Private Project
-                      </Button>
-                    ) : (
-                      proj.githubUrl && proj.githubUrl !== "#" && (
-                        <Button asChild size="sm" variant="outline" className="flex-1">
-                          <Link href={proj.githubUrl} target="_blank"><Github className="h-3.5 w-3.5 mr-1.5" />Code</Link>
-                        </Button>
-                      )
-                    )}
-                    {proj.liveUrl && (
-                      <Button asChild size="sm" className="flex-1">
-                        <Link href={proj.liveUrl} target="_blank" download={proj.liveUrl.endsWith(".zip")}>
-                          <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
-                          {proj.liveUrl.endsWith(".zip") ? "Download" : "Demo"}
-                        </Link>
-                      </Button>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Button asChild variant="outline" size="lg" className="group">
-              <Link href="/projects">View All Projects<ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" /></Link>
-            </Button>
-          </div>
-        </div>
-      </Section>
-
-      {/* ====== CERTIFICATES ====== */}
-      <Section id="certificates" className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 px-4 py-1">Credentials</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">My Certifications</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Professional certifications and recognition for continuous learning</p>
-          </div>
-
-          <div className="max-w-5xl mx-auto">
-            <div className="mb-12">
-              <h3 className="text-xl font-bold mb-6 flex items-center gap-2"><BookOpen className="h-5 w-5 text-primary" />📜 Certificates</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                {certificates.slice(0, 3).map((c, i) => (
-                  <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden">
-                    <div className="relative w-full aspect-[4/3] bg-muted/20 border-b">
-                      {c.image ? (
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <div className="relative w-full h-full cursor-pointer hover:opacity-90 transition-opacity">
-                              <Image src={c.image} alt={c.title} fill className="object-contain p-4 transition-transform duration-500 group-hover:scale-105" />
-                            </div>
-                          </DialogTrigger>
-                          <DialogContent className="max-w-4xl w-full p-0 overflow-hidden bg-transparent border-none shadow-none">
-                            <DialogTitle className="sr-only">{c.title}</DialogTitle>
-                            <div className="relative w-full h-[80vh]">
-                              <Image src={c.image} alt={c.title} fill className="object-contain" />
-                            </div>
-                          </DialogContent>
-                        </Dialog>
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-primary/10">
-                          <Award className="h-8 w-8 text-primary" />
-                        </div>
-                      )}
-                    </div>
-                    <CardContent className="p-5 text-left">
-                      <p className="text-sm font-semibold text-primary mb-1">{c.issuer}</p>
-                      <h4 className="font-bold text-lg leading-tight group-hover:text-primary/80 transition-colors">{c.title}</h4>
-                    </CardContent>
-                  </Card>
+          <div className="credentials-layout">
+            <div>
+              <div className="subsection-heading"><BookOpen /><h3>Certifications</h3><span>{certificates.length.toString().padStart(2, "0")}</span></div>
+              <div className="certificate-grid">
+                {certificates.slice(0, 3).map((certificate) => (
+                  <Dialog key={certificate.title}>
+                    <DialogTrigger asChild>
+                      <button className="certificate-card" type="button">
+                        <span className="certificate-image"><Image src={certificate.image} alt={certificate.title} fill sizes="(max-width: 768px) 100vw, 320px" /></span>
+                        <span className="certificate-copy"><small>{certificate.issuer} · {certificate.date}</small><strong>{certificate.title}</strong><em>View credential <ExternalLink /></em></span>
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="credential-dialog">
+                      <DialogTitle className="sr-only">{certificate.title}</DialogTitle>
+                      <div className="credential-preview"><Image src={certificate.image} alt={certificate.title} fill sizes="90vw" /></div>
+                    </DialogContent>
+                  </Dialog>
                 ))}
               </div>
-              <div className="text-center mt-8">
-                <Button asChild variant="outline" size="lg" className="group">
-                  <Link href="/certificates">View All My Certifications<ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" /></Link>
-                </Button>
-              </div>
+              <Link href="/certificates" className="inline-text-link">View all certifications <ArrowRight /></Link>
             </div>
 
-            {/* Achievements Section underneath Certificates */}
-            <div className="mb-12 mt-20">
-              <h3 className="text-xl font-bold mb-6 flex items-center gap-2"><Trophy className="h-5 w-5 text-primary" />🏆 Achievements</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                {achievements.map((a, i) => (
-                  <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden">
-                    <div className="relative w-full aspect-[4/3] bg-muted/20 border-b">
-                      {a.image ? (
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <div className="relative w-full h-full cursor-pointer hover:opacity-90 transition-opacity">
-                              <Image src={a.image} alt={a.title} fill className="object-contain p-4 transition-transform duration-500 group-hover:scale-105" />
-                            </div>
-                          </DialogTrigger>
-                          <DialogContent className="max-w-4xl w-full p-0 overflow-hidden bg-transparent border-none shadow-none">
-                            <DialogTitle className="sr-only">{a.title}</DialogTitle>
-                            <div className="relative w-full h-[80vh]">
-                              <Image src={a.image} alt={a.title} fill className="object-contain" />
-                            </div>
-                          </DialogContent>
-                        </Dialog>
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-primary/10">
-                          <Trophy className="h-8 w-8 text-primary" />
-                        </div>
-                      )}
-                    </div>
-                    <CardContent className="p-5 text-left">
-                      <p className="text-sm font-semibold text-primary mb-1">{a.issuer}</p>
-                      <h4 className="font-bold text-lg leading-tight group-hover:text-primary/80 transition-colors">{a.title}</h4>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </Section>
-
-      {/* ====== COMMUNITY ====== */}
-      <Section id="community" className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 px-4 py-1">Community</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Forums &amp; Tech Communities</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Active participation in developer communities and tech events</p>
-          </div>
-          <div className="max-w-4xl mx-auto space-y-6">
-            {communities.map((cm, i) => (
-              <Card key={i} className="hover:shadow-lg transition-all duration-300 overflow-hidden group">
-                {cm.image && (
-                  <div className="relative w-full aspect-video md:aspect-[21/9] bg-white border-b">
-                    <Image src={cm.image} alt={cm.name} fill className="object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
-                  </div>
-                )}
-                <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row gap-4 items-start">
-                    {!cm.image && (
-                      <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center shrink-0"><Users className="h-7 w-7 text-primary" /></div>
-                    )}
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{cm.name}</h3>
-                          <p className="text-muted-foreground mb-4 leading-relaxed">{cm.description}</p>
-                        </div>
-                        <Link href={cm.link} target="_blank" className="shrink-0">
-                          <Button variant="outline" size="icon" className="group/btn"><ExternalLink className="h-4 w-4 group-hover/btn:scale-110 transition-transform" /></Button>
-                        </Link>
-                      </div>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {cm.tags.map((tg) => <Badge key={tg} variant="secondary" className="px-3 py-1">{tg}</Badge>)}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* ====== CONTACT ====== */}
-      <Section id="contact" className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 px-4 py-1">Contact</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Feel free to reach out for opportunities or collaborations</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto items-start">
-            {/* Left Column: Contact Info */}
-            <div className="space-y-6">
-              <Card className="hover:shadow-lg transition-all hover:-translate-y-1">
-                <CardContent className="p-6 flex items-center gap-6">
-                  <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
-                    <Mail className="h-7 w-7 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold mb-1">Email</h4>
-                    <Link href="mailto:thangak18@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">thangak18@gmail.com</Link>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-all hover:-translate-y-1">
-                <CardContent className="p-6 flex items-center gap-6">
-                  <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
-                    <MapPin className="h-7 w-7 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold mb-1">Location</h4>
-                    <p className="text-sm text-muted-foreground">Ho Chi Minh City, Vietnam</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-all hover:-translate-y-1">
-                <CardContent className="p-6 flex items-center gap-6">
-                  <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
-                    <GraduationCap className="h-7 w-7 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold mb-1">University</h4>
-                    <p className="text-sm text-muted-foreground">HCMUS</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Right Column: Social Links */}
-            <div className="flex flex-col justify-center h-full">
-              <div className="mb-8">
-                <h3 className="text-xl font-bold mb-2">Connect With Me</h3>
-                <p className="text-muted-foreground">Find me on these platforms</p>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {[
-                  { name: "LinkedIn", href: "https://www.linkedin.com/in/th%E1%BA%AFng-nguy%E1%BB%85n-598741283/", icon: LinkedInIcon, color: "text-[#0077b5]" },
-                  { name: "GitHub", href: "https://github.com/thangak18", icon: Github, color: "text-foreground" },
-                  { name: "Facebook", href: "https://www.facebook.com/nguyen.thang.739214/", icon: FacebookIcon, color: "text-[#1877f2]" },
-                  { name: "Instagram", href: "https://www.instagram.com/", icon: InstagramIcon, color: "text-[#E1306C]" },
-                  { name: "Google for Developers", href: "https://developers.google.com/profile/u/109377312233026751269?hl=vi", icon: GoogleDevIcon, color: "" },
-                ].map((sc) => (
-                  <Link key={sc.name} href={sc.href} target="_blank">
-                    <Card className="hover:shadow-md transition-all hover:-translate-y-1 h-full group">
-                      <CardContent className="p-4 flex flex-col items-center justify-center text-center gap-3 h-full">
-                        <sc.icon className={`h-8 w-8 ${sc.color} transition-transform group-hover:scale-110`} />
-                        <span className="text-xs font-medium">{sc.name}</span>
-                      </CardContent>
-                    </Card>
-                  </Link>
+            <div>
+              <div className="subsection-heading achievement-heading"><Trophy /><h3>Achievements</h3><span>{achievements.length.toString().padStart(2, "0")}</span></div>
+              <div className="achievement-list">
+                {achievements.map((achievement, index) => (
+                  <Dialog key={achievement.title}>
+                    <DialogTrigger asChild>
+                      <button className="achievement-card" type="button">
+                        <span className="achievement-number">0{index + 1}</span>
+                        <span className="achievement-icon"><Award /></span>
+                        <span className="achievement-copy"><small>{achievement.issuer}</small><strong>{achievement.title}</strong><em>{achievement.date}</em></span>
+                        <ArrowRight className="achievement-arrow" />
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="credential-dialog">
+                      <DialogTitle className="sr-only">{achievement.title}</DialogTitle>
+                      <div className="credential-preview"><Image src={achievement.image} alt={achievement.title} fill sizes="90vw" /></div>
+                    </DialogContent>
+                  </Dialog>
                 ))}
               </div>
             </div>
           </div>
         </div>
-      </Section>
+      </RevealSection>
+
+      <RevealSection id="community" className="section-surface">
+        <div className="portfolio-container">
+          <SectionHeading
+            number="06"
+            label="Community"
+            title="Learning grows faster when it is shared."
+            copy="I stay close to the developer community through events, technical discussions, and hands-on learning."
+          />
+
+          {communities.map((community) => (
+            <article className="community-feature" key={community.name} data-glow-card>
+              <div className="community-image"><Image src={community.image} alt={community.name} fill sizes="(max-width: 900px) 100vw, 560px" /></div>
+              <div className="community-copy">
+                <div className="community-label"><Users /> Active community</div>
+                <h3>{community.name}</h3>
+                <p>{community.description}</p>
+                <div>{community.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                <Link href={community.link} target="_blank">Visit community <ExternalLink /></Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </RevealSection>
+
+      <RevealSection id="contact" className="contact-section">
+        <div className="portfolio-container">
+          <div className="contact-panel" data-glow-card>
+            <div className="contact-glow" aria-hidden="true" />
+            <div className="contact-kicker"><Sparkles /> Available for new conversations</div>
+            <h2>Let&apos;s build something useful together.</h2>
+            <p>
+              I&apos;m open to internship opportunities, software engineering collaborations, open-source work, and thoughtful
+              conversations about technology.
+            </p>
+            <div className="contact-actions">
+              <Link href="mailto:thangak18@gmail.com" className="portfolio-button portfolio-button-primary">Start a conversation <Mail /></Link>
+              <Link href="https://github.com/thangak18" target="_blank" className="portfolio-button portfolio-button-secondary">Explore GitHub <Github /></Link>
+            </div>
+            <div className="contact-meta">
+              <span><Mail /> thangak18@gmail.com</span>
+              <span><MapPin /> Ho Chi Minh City, Vietnam</span>
+              <span><GraduationCap /> HCMUS</span>
+            </div>
+          </div>
+        </div>
+      </RevealSection>
+
+      <button
+        type="button"
+        className={`back-to-top ${showBackToTop ? "is-visible" : ""}`}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label="Back to top"
+      >
+        <ArrowUp />
+      </button>
     </main>
   )
 }

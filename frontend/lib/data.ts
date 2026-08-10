@@ -24,3 +24,19 @@ export const communities = [
         image: "/C7.png"
     },
 ]
+
+export const experiences = [
+    {
+        company: "Netcompany",
+        logo: "/netcompany-logo.svg",
+        location: "Ho Chi Minh City (On-site)",
+        role: "IT Accelerator Intern",
+        date: "Jul 2026 – Present",
+        duration: "",
+        descriptions: [
+            "Participating in the development of the After Dark Management Application (ADMA), a back-office financial and operational hub for managing corporate social initiatives. Engaging in a full software development lifecycle within an Agile environment, taking part in architecture design, database modeling, and MVP implementation.",
+            "Building scalable backend workflows for budget forecasting, event operations, expense tracking, and dynamic approval processes to streamline internal management."
+        ],
+        technologies: ["Agile", "Architecture Design", "Database Modeling", "Backend Workflows", "MVP"]
+    }
+]

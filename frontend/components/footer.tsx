@@ -1,83 +1,50 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
-import { Eye } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { useLanguage, useVisitor } from "@/lib/contexts"
+import { ArrowUpRight, Eye, Github, Linkedin, Mail, MapPin } from "lucide-react"
+import { useVisitor } from "@/lib/contexts"
+
+const footerLinks = [
+  ["Experience", "/#experience"],
+  ["Skills", "/#skills"],
+  ["Projects", "/#projects"],
+  ["Credentials", "/#certificates"],
+  ["Community", "/#community"],
+  ["Contact", "/#contact"],
+]
 
 export default function Footer() {
-  const { t } = useLanguage()
   const { visitorCount } = useVisitor()
 
-  const quickLinks = [
-    { name: "Home", href: "/#home" },
-    { name: "About", href: "/#about" },
-    { name: "Skills", href: "/#skills" },
-    { name: "Projects", href: "/#projects" },
-    { name: "Certificates", href: "/certificates" },
-    { name: "Contact", href: "/#contact" },
-  ]
-
-  const builtWith = ["React", "TypeScript", "TailwindCSS", "Next.js", "shadcn/ui"]
-
   return (
-    <footer className="border-t bg-background/50 backdrop-blur-sm">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-4 gap-12">
-          {/* University Info */}
-          <div className="md:col-span-2 flex items-start gap-4">
-            <div className="relative w-16 h-16 shrink-0 rounded-full overflow-hidden border bg-white">
-              <Image src="/logo.jpeg" alt="HCMUS Logo" fill className="object-cover" />
-            </div>
-            <div className="space-y-1">
-              <h3 className="font-bold text-lg leading-tight">University of Science - VNUHCM</h3>
-              <p className="text-sm text-muted-foreground">Faculty of Information Technology</p>
-              <p className="text-sm text-muted-foreground">Major: Software Engineering</p>
-              <p className="text-sm text-muted-foreground">Expected: 2027</p>
-            </div>
+    <footer className="site-footer">
+      <div className="portfolio-container">
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <div className="site-logo"></div>
+            <p>Software engineer focused on reliable backend systems, cloud delivery, and thoughtful digital products.</p>
+            <span><MapPin /> Ho Chi Minh City, Vietnam</span>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-bold mb-4 text-foreground">Quick Links</h4>
-            <nav className="flex flex-col space-y-3">
-              {quickLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors w-fit"
-                >
-                  {link.name}
-                </Link>
-              ))}
+          <div className="footer-column">
+            <h3>Explore</h3>
+            <nav>
+              {footerLinks.map(([label, href]) => <Link key={label} href={href}>{label}</Link>)}
             </nav>
           </div>
 
-          {/* Built With */}
-          <div>
-            <h4 className="font-bold mb-4 text-foreground">Built With</h4>
-            <div className="flex flex-wrap gap-2">
-              {builtWith.map((tech) => (
-                <Badge key={tech} variant="secondary" className="text-xs font-normal bg-secondary/50 hover:bg-secondary">
-                  {tech}
-                </Badge>
-              ))}
-            </div>
+          <div className="footer-column footer-connect">
+            <h3>Connect</h3>
+            <Link href="https://github.com/thangak18" target="_blank"><Github /> GitHub <ArrowUpRight /></Link>
+            <Link href="https://www.linkedin.com/in/th%E1%BA%AFng-nguy%E1%BB%85n-598741283/" target="_blank"><Linkedin /> LinkedIn <ArrowUpRight /></Link>
+            <Link href="mailto:thangak18@gmail.com"><Mail /> Email <ArrowUpRight /></Link>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Nguyen Tan Thang. All rights reserved.
-          </p>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-medium">
-              <Eye className="h-3 w-3" />
-              <span>Profile Views {visitorCount.toLocaleString()}</span>
-            </div>
-          </div>
+        <div className="footer-bottom">
+          <p>© {new Date().getFullYear()} Nguyen Tan Thang. Built with precision.</p>
+          <div><span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span></div>
+          <span className="footer-views"><Eye /> {visitorCount.toLocaleString()} profile views</span>
         </div>
       </div>
     </footer>
