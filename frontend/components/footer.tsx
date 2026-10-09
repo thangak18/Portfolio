@@ -8,6 +8,7 @@ const footerLinks = [
   ["Experience", "/#experience"],
   ["Skills", "/#skills"],
   ["Projects", "/#projects"],
+  ["Honors", "/#honors"],
   ["Credentials", "/#certificates"],
   ["Community", "/#community"],
   ["Contact", "/#contact"],

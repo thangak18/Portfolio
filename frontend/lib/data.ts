@@ -10,9 +10,73 @@ export const certificates = [
 
 
 
+export interface HonorItem {
+  id: string
+  title: string
+  award: string
+  issuer: string
+  team?: string
+  date: string
+  highlight: string
+  description: string
+  tags: string[]
+  image: string
+  metrics?: string
+  proofLabel?: string
+}
+
+export const honors: HonorItem[] = [
+  {
+    id: "datathon-2026",
+    title: "VinUniversity Datathon 'The Gridbreaker' 2026",
+    award: "Top 10 Finalist (Ranked 10th)",
+    issuer: "VinUniversity & Vingroup",
+    team: "GenCore Team",
+    date: "2026",
+    metrics: "Top 10 / 50 Grand Finalists (500+ teams nationwide)",
+    highlight: "Outperformed 500+ teams and 2,000+ contestants across Vietnam",
+    description:
+      "Tackled large-scale electrical grid data modeling, anomaly detection, and predictive machine learning algorithms under intensive hackathon time constraints. Ranked 10th in the Grand Finale among the top 50 qualified teams nationwide.",
+    tags: ["Big Data", "Machine Learning", "Grid Modeling", "Python", "Data Science"],
+    image: "/C24.jpg",
+    proofLabel: "View Datathon Certificate",
+  },
+  {
+    id: "hsu-ai-driven-2026",
+    title: "HSU AI-Driven Challenge 2026 (AI Security)",
+    award: "3rd Runner Up / Top Finalist",
+    issuer: "Hoa Sen University (HSU)",
+    team: "Team Firewall404",
+    date: "2026",
+    metrics: "Top Finalist & Podium Award",
+    highlight: "Sàng lọc rủi ro, làm chủ an ninh AI (AI Security & Guardrails)",
+    description:
+      "Awarded 3rd Runner Up at the HSU AI-Driven Challenge 2026 under the theme 'Mitigating Risks, Mastering AI Security'. Engineered Machine Learning & guardrail models to classify input prompt safety, detect data leakage risks, and defend against adversarial AI manipulation.",
+    tags: ["AI Security", "Machine Learning", "Prompt Safety", "Adversarial Defense", "Python"],
+    image: "/hsu-ai-driven.jpg",
+    proofLabel: "View HSU Award Certificate",
+  },
+  {
+    id: "studyjams-2026",
+    title: "Study Jams / GenAI Express Demo Day 2026",
+    award: "Second Runner-up (Á quân)",
+    issuer: "Saigon University & GDG on Campus SGU",
+    team: "Core Builder",
+    date: "2026",
+    metrics: "Podium Finish · Top 3 Teams",
+    highlight: "Rapid GenAI Prototyping & Solution Architecture",
+    description:
+      "Engineered an applied AI prototype demonstrating practical generative AI workflows and modern cloud architecture, achieving 2nd Runner-up at the annual university AI demo day.",
+    tags: ["Generative AI", "Agentic Systems", "Google Cloud", "FastAPI"],
+    image: "/C8.jpg",
+    proofLabel: "View Recognition Certificate",
+  },
+]
+
 export const achievements = [
-    { title: "Top 10 Datathon 2026", issuer: "GenCore Team (Member)", date: "2026", url: "#", image: "/C24.jpg" },
-    { title: "Second Runner-up - Study Jams 2026", issuer: "Saigon University", date: "2026", url: "#", image: "/C8.jpg" },
+  { title: "Top 10 Datathon 2026", issuer: "GenCore Team (Member)", date: "2026", url: "#", image: "/C24.jpg" },
+  { title: "3rd Runner Up - HSU AI-Driven Challenge 2026", issuer: "Hoa Sen University", date: "2026", url: "#", image: "/hsu-ai-driven.jpg" },
+  { title: "Second Runner-up - Study Jams 2026", issuer: "Saigon University", date: "2026", url: "#", image: "/C8.jpg" },
 ]
 
 export const communities = [
@@ -29,7 +93,7 @@ export const experiences = [
     {
         company: "Netcompany",
         logo: "/netcompany-logo.svg",
-        location: "Ho Chi Minh City (On-site)",
+        location: "Remote",
         role: "IT Accelerator Intern",
         date: "Jul 2026 – Present",
         duration: "",

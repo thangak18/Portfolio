@@ -1,0 +1,50 @@
+# Nguyen Tan Thang (thangak18)
+
+> Software Engineer · Backend Systems & Cloud · HCMUS (Software Engineering) · Netcompany IT Accelerator Intern · VinUniversity Datathon 2026 Top 10 Finalist (GenCore Team)
+
+## Identity (canonical)
+- **Name:** Nguyen Tan Thang / Nguyễn Tấn Thắng
+- **Alias:** thangak18
+- **Role:** Software Engineer / Backend Developer
+- **University:** VNUHCM - University of Science (HCMUS) — Software Engineering (Class of 2027)
+- **Location:** Ho Chi Minh City, Vietnam
+- **Website:** https://portfolio-thangak18.vercel.app
+- **GitHub:** https://github.com/thangak18
+- **LinkedIn:** https://www.linkedin.com/in/th%E1%BA%AFng-nguy%E1%BB%85n-598741283/
+- **Email:** thangak18@gmail.com
+
+## Overview
+Nguyen Tan Thang (thangak18) is a Software Engineer based in Ho Chi Minh City, specializing in robust backend systems, distributed architectures, cloud delivery, and modern full-stack web products. He is currently an **IT Accelerator Intern at Netcompany**, an undergraduate in Software Engineering at **VNUHCM - University of Science (HCMUS)**, and a **Top 10 Finalist** at the nationwide **VinUniversity Datathon 2026 ("The Gridbreaker")** as part of Team GenCore (outperforming 500+ teams and 2,000+ contestants).
+
+## Education
+- **VNUHCM - University of Science (HCMUS)** (2023 – 2027 Expected)
+  - Major: Software Engineering
+  - Academic Progress: Semester 10 of 12
+  - Focus: Data Structures & Algorithms, Distributed Systems, Software Architecture, Database Design.
+
+## Work Experience
+- **Netcompany** — IT Accelerator Intern (Jul 2026 – Present, Remote)
+  - Engineering core features for the **After Dark Management Application (ADMA)**, an internal enterprise back-office financial and operational hub.
+  - Participating in the full SDLC in an Agile environment: software architecture design, database modeling, and MVP implementation.
+  - Developing scalable backend workflows for budget forecasting, event operations, expense tracking, and dynamic multi-level approval processes.
+  - Technologies: Java, Spring Boot, Agile/Scrum, Relational Databases, RESTful APIs.
+
+## Key Competition Honors & Awards
+- **VinUniversity Datathon "The Gridbreaker" 2026 — Top 10 Finalist (Team GenCore)**
+  - Ranked 10th in the Grand Finale among the top 50 qualified teams, outperforming 500+ teams and 2,000+ competitors nationwide in big data analytics, grid data modeling, and machine learning under time constraints.
+- **HSU AI-Driven Challenge 2026 — 3rd Runner Up / Top Finalist (Team Firewall404)**
+  - Organized by Hoa Sen University (HSU) under the theme "Mitigating Risks, Mastering AI Security". Engineered machine learning guardrails, prompt injection safety evaluation, and adversarial AI defense.
+- **Study Jams / GenAI Express Demo Day 2026 — Second Runner-up (Á quân)**
+  - Organized by Saigon University (SGU) & GDG on Campus SGU. Recognized for rapid prototyping and AI integration.
+
+## Key Projects
+- **ThreatLens** (Security Intelligence Platform): Threat intelligence and vulnerability management platform turning complex security signals into actionable risk insights. (Python, React, Node.js, MongoDB, Docker).
+- **EduVault** (Cloud Online Learning Platform): Scalable online learning platform integrating a Spring Boot backend API with a modern Next.js interface, containerized with Docker and deployed on AWS.
+- **Instant Messaging System** (Real-time Desktop App): Multi-threaded desktop messaging application built with Java Sockets, JavaFX, and PostgreSQL featuring secure socket communication and file transfer.
+- **Online Auction System** (Real-time E-commerce): Full-stack auction platform featuring real-time bidding, user and administrator dashboards, and transactional PostgreSQL integrity.
+
+## Technical Skills
+- **Languages:** Java, Python, TypeScript, JavaScript, SQL, C/C++
+- **Frameworks & Backend:** Spring Boot, Next.js, React, FastAPI, Node.js, Express, Tailwind CSS
+- **Databases & Cloud:** PostgreSQL, MongoDB, Docker, AWS, Google Cloud, Vercel, Nginx, CI/CD
+- **Practices:** Microservices, REST APIs, Agile/Scrum, Data Modeling, Secure Coding

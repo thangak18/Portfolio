@@ -30,7 +30,7 @@ import {
   Users,
 } from "lucide-react"
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { achievements, certificates, communities, experiences } from "@/lib/data"
+import { achievements, certificates, communities, experiences, honors } from "@/lib/data"
 
 
 const projects = [
@@ -393,9 +393,9 @@ export default function Home() {
                 <p>From API design to usable product experiences.</p>
               </div>
               <div className="journey-step is-current">
-                <span>07</span>
+                <span>10</span>
                 <small>Now</small>
-                <strong>Semester 7 of 12</strong>
+                <strong>Semester 10 of 12</strong>
                 <p>Deepening cloud, deployment, and system design skills.</p>
               </div>
               <div className="journey-step">
@@ -554,56 +554,121 @@ export default function Home() {
         </div>
       </RevealSection>
 
-      <RevealSection id="certificates">
+      <RevealSection id="honors" className="section-surface">
         <div className="portfolio-container">
           <SectionHeading
             number="05"
-            label="Credentials"
-            title="Evidence of continuous learning and meaningful progress."
-            copy="Certificates build the foundation. Achievements show what happens when that learning is put into practice."
+            label="Hackathons & Honors"
+            title="Validated outcomes from national hackathons & challenges."
+            copy="High-intensity engineering and problem solving under competitive pressure, validated by official judge panels and podium finishes."
           />
 
-          <div className="credentials-layout">
+          <div className="honors-showcase-grid">
+            {honors.map((honor, index) => (
+              <article className="honor-feature-card" key={honor.id} data-glow-card>
+                <div className="honor-card-media">
+                  <Image
+                    src={honor.image}
+                    alt={honor.title}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 560px"
+                    className="honor-img"
+                  />
+                  <div className="honor-media-overlay" />
+                  <div className="honor-rank-pill">
+                    <Trophy className="honor-trophy-icon" />
+                    <span>{honor.award}</span>
+                  </div>
+                </div>
+
+                <div className="honor-card-body">
+                  <div className="honor-card-meta">
+                    <span className="honor-card-issuer">{honor.issuer}</span>
+                    <span className="honor-card-year">{honor.date}</span>
+                  </div>
+
+                  <h3 className="honor-card-title">{honor.title}</h3>
+
+                  <div className="honor-highlight-callout">
+                    <Sparkles className="honor-sparkle-icon" />
+                    <span>{honor.highlight}</span>
+                  </div>
+
+                  <p className="honor-card-desc">{honor.description}</p>
+
+                  <div className="honor-tags-wrap">
+                    {honor.tags.map((tag) => (
+                      <span key={tag} className="honor-tag-pill">{tag}</span>
+                    ))}
+                  </div>
+
+                  <div className="honor-card-footer">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <button type="button" className="honor-inspect-btn">
+                          <Award /> {honor.proofLabel || "Inspect Certificate"} <ExternalLink />
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent className="credential-dialog">
+                        <DialogTitle className="sr-only">{honor.title}</DialogTitle>
+                        <div className="credential-preview">
+                          <Image src={honor.image} alt={honor.title} fill sizes="90vw" />
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                    {honor.team && <span className="honor-team-label">{honor.team}</span>}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </RevealSection>
+
+      <RevealSection id="certificates">
+        <div className="portfolio-container">
+          <SectionHeading
+            number="06"
+            label="Credentials"
+            title="Evidence of continuous learning and foundational mastery."
+            copy="Industry credentials validating foundations in cloud architecture, modern full-stack development, and AI engineering."
+          />
+
+          <div className="credentials-layout single-col">
             <div>
-              <div className="subsection-heading"><BookOpen /><h3>Certifications</h3><span>{certificates.length.toString().padStart(2, "0")}</span></div>
+              <div className="subsection-heading">
+                <BookOpen />
+                <h3>Certifications</h3>
+                <span>{certificates.length.toString().padStart(2, "0")}</span>
+              </div>
               <div className="certificate-grid">
                 {certificates.slice(0, 3).map((certificate) => (
                   <Dialog key={certificate.title}>
                     <DialogTrigger asChild>
                       <button className="certificate-card" type="button">
-                        <span className="certificate-image"><Image src={certificate.image} alt={certificate.title} fill sizes="(max-width: 768px) 100vw, 320px" /></span>
-                        <span className="certificate-copy"><small>{certificate.issuer} · {certificate.date}</small><strong>{certificate.title}</strong><em>View credential <ExternalLink /></em></span>
+                        <span className="certificate-image">
+                          <Image src={certificate.image} alt={certificate.title} fill sizes="(max-width: 768px) 100vw, 320px" />
+                        </span>
+                        <span className="certificate-copy">
+                          <small>{certificate.issuer} · {certificate.date}</small>
+                          <strong>{certificate.title}</strong>
+                          <em>View credential <ExternalLink /></em>
+                        </span>
                       </button>
                     </DialogTrigger>
                     <DialogContent className="credential-dialog">
                       <DialogTitle className="sr-only">{certificate.title}</DialogTitle>
-                      <div className="credential-preview"><Image src={certificate.image} alt={certificate.title} fill sizes="90vw" /></div>
+                      <div className="credential-preview">
+                        <Image src={certificate.image} alt={certificate.title} fill sizes="90vw" />
+                      </div>
                     </DialogContent>
                   </Dialog>
                 ))}
               </div>
-              <Link href="/certificates" className="inline-text-link">View all certifications <ArrowRight /></Link>
-            </div>
-
-            <div>
-              <div className="subsection-heading achievement-heading"><Trophy /><h3>Achievements</h3><span>{achievements.length.toString().padStart(2, "0")}</span></div>
-              <div className="achievement-list">
-                {achievements.map((achievement, index) => (
-                  <Dialog key={achievement.title}>
-                    <DialogTrigger asChild>
-                      <button className="achievement-card" type="button">
-                        <span className="achievement-number">0{index + 1}</span>
-                        <span className="achievement-icon"><Award /></span>
-                        <span className="achievement-copy"><small>{achievement.issuer}</small><strong>{achievement.title}</strong><em>{achievement.date}</em></span>
-                        <ArrowRight className="achievement-arrow" />
-                      </button>
-                    </DialogTrigger>
-                    <DialogContent className="credential-dialog">
-                      <DialogTitle className="sr-only">{achievement.title}</DialogTitle>
-                      <div className="credential-preview"><Image src={achievement.image} alt={achievement.title} fill sizes="90vw" /></div>
-                    </DialogContent>
-                  </Dialog>
-                ))}
+              <div className="section-cta" style={{ marginTop: '28px' }}>
+                <Link href="/certificates" className="portfolio-button portfolio-button-secondary">
+                  View all certifications & honors <ChevronRight />
+                </Link>
               </div>
             </div>
           </div>
@@ -613,7 +678,7 @@ export default function Home() {
       <RevealSection id="community" className="section-surface">
         <div className="portfolio-container">
           <SectionHeading
-            number="06"
+            number="07"
             label="Community"
             title="Learning grows faster when it is shared."
             copy="I stay close to the developer community through events, technical discussions, and hands-on learning."

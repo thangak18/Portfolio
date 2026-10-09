@@ -11,6 +11,7 @@ const sections = [
   { label: "Experience", id: "experience" },
   { label: "Skills", id: "skills" },
   { label: "Projects", id: "projects" },
+  { label: "Honors", id: "honors" },
   { label: "Credentials", id: "certificates" },
   { label: "Community", id: "community" },
   { label: "Contact", id: "contact" },
