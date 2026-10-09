@@ -16,25 +16,9 @@ interface VisitorContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 const VisitorContext = createContext<VisitorContextType | undefined>(undefined)
-const VISITOR_COUNTER_NAMESPACE =
-  process.env.NEXT_PUBLIC_VISITOR_COUNTER_NAMESPACE || "portfolio-thangak18"
-const VISITOR_COUNTER_NAME =
-  process.env.NEXT_PUBLIC_VISITOR_COUNTER_NAME || "profile-views"
-const VISITOR_COUNTER_URL = `https://api.counterapi.dev/v1/${encodeURIComponent(
-  VISITOR_COUNTER_NAMESPACE,
-)}/${encodeURIComponent(VISITOR_COUNTER_NAME)}`
 const VISITOR_COUNT_STORAGE_KEY = "portfolio-profile-views-count"
 
 let visitorRecordPromise: Promise<number | null> | null = null
-
-function getCountFromPayload(payload: unknown): number | null {
-  if (!payload || typeof payload !== "object") return null
-
-  const data = payload as { count?: unknown; value?: unknown }
-  const count = Number(data.count ?? data.value)
-
-  return Number.isFinite(count) && count >= 0 ? count : null
-}
 
 function readSavedVisitorCount() {
   if (typeof window === "undefined") return 0
@@ -49,15 +33,18 @@ function saveVisitorCount(count: number) {
   window.localStorage.setItem(VISITOR_COUNT_STORAGE_KEY, String(count))
 }
 
-async function recordProfileView() {
-  const response = await fetch(`${VISITOR_COUNTER_URL}/up`, {
+async function recordProfileView(): Promise<number | null> {
+  const response = await fetch("/api/visitors", {
     method: "GET",
     cache: "no-store",
   })
 
   if (!response.ok) return null
 
-  return getCountFromPayload(await response.json())
+  const data = await response.json()
+  const count = Number(data.count)
+
+  return Number.isFinite(count) && count >= 0 ? count : null
 }
 
 function getVisitorRecordPromise() {
